@@ -1,29 +1,52 @@
-import { CartProvider } from 'components/cart/cart-context';
-import { Navbar } from 'components/layout/navbar';
-import { WelcomeToast } from 'components/welcome-toast';
-import { GeistSans } from 'geist/font/sans';
-import { getCart } from 'lib/shopify';
-import { ReactNode } from 'react';
-import { Toaster } from 'sonner';
-import './globals.css';
-import { baseUrl } from 'lib/utils';
+import { GeistSans } from "geist/font/sans";
+import { getCart } from "lib/shopify";
+import { baseUrl } from "lib/utils";
+import { ReactNode } from "react";
+import "./globals.css";
 
 const { SITE_NAME } = process.env;
+
+import localFont from "next/font/local";
+
+const riftFont = localFont({
+  src: [
+    {
+      path: "../fonts/RiftBold.otf",
+      weight: "700",
+      style: "bold",
+    },
+  ],
+  variable: "--rift-font-family",
+  display: "swap",
+  fallback: ["system-ui", "sans-serif"],
+  preload: true,
+});
+
+const acuminFont = localFont({
+  src: [
+    {
+      path: "../fonts/AcuminVariableConcept.otf",
+      weight: "400",
+      style: "normal",
+    },
+  ],
+  variable: "--font-acumin",
+});
 
 export const metadata = {
   metadataBase: new URL(baseUrl),
   title: {
     default: SITE_NAME!,
-    template: `%s | ${SITE_NAME}`
+    template: `%s | ${SITE_NAME}`,
   },
   robots: {
     follow: true,
-    index: true
-  }
+    index: true,
+  },
 };
 
 export default async function RootLayout({
-  children
+  children,
 }: {
   children: ReactNode;
 }) {
@@ -32,15 +55,12 @@ export default async function RootLayout({
 
   return (
     <html lang="en" className={GeistSans.variable}>
-      <body className="bg-neutral-50 text-black selection:bg-teal-300 dark:bg-neutral-900 dark:text-white dark:selection:bg-pink-500 dark:selection:text-white">
-        <CartProvider cartPromise={cart}>
-          <Navbar />
-          <main>
-            {children}
-            <Toaster closeButton />
-            <WelcomeToast />
-          </main>
-        </CartProvider>
+      <body
+        className={`text-foreground bg-background ${acuminFont.variable} ${riftFont.variable}`}
+      >
+        <main>
+          {children}
+        </main>
       </body>
     </html>
   );
