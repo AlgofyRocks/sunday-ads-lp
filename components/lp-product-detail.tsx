@@ -17,7 +17,7 @@ import { AnimatePresence, motion } from "motion/react";
 import React, { useCallback, useMemo, useRef, useState } from "react";
 
 const ProductDetailPage: React.FC<ProductDetailPageProps> = ({
-  className = "",
+  className = " ",
 }) => {
   // State management
   const [selectedImage, setSelectedImage] = useState(0);
