@@ -135,7 +135,7 @@ export default function LPHero() {
               SHOP SUNDAY
             </Link>
             <p className="font-heading uppercase flex items-center justify-center gap-2 md:text-white text-sm">
-              <Truck /> Free Shipping on 24 packs.
+              <Truck /> Free Shipping over $100
             </p>
           </div>
           <ul className=" relative z-10 flex flex-col md:flex-row w-full items-center justify-center md:justify-between md:mt-0 mt-32 mb-4">

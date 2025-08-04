@@ -26,6 +26,8 @@ const ProductDetailPage: React.FC<ProductDetailPageProps> = ({
   const [selectedPurchaseType, setSelectedPurchaseType] = useState("onetime");
   const [quantity, setQuantity] = useState(1);
   const [openAccordions, setOpenAccordions] = useState<string[]>([]);
+  const [showStickyCart, setShowStickyCart] = useState(false);
+  const sectionRef = useRef<HTMLDivElement>(null);
 
   // Touch handling state
   const touchStartX = useRef<number>(0);
@@ -44,7 +46,7 @@ const ProductDetailPage: React.FC<ProductDetailPageProps> = ({
     if (!variantPrice) {
       return {
         current: "0.00",
-        original: null,
+        original: 0.0,
       };
     }
 
@@ -68,7 +70,7 @@ const ProductDetailPage: React.FC<ProductDetailPageProps> = ({
 
     return {
       current: subtotal.toFixed(2),
-      original: null,
+      original: basePrice,
       compareAtPrice: variantPrice.compareAtPrice
         ? (parseFloat(variantPrice.compareAtPrice) * quantity).toFixed(2)
         : null,
@@ -82,40 +84,50 @@ const ProductDetailPage: React.FC<ProductDetailPageProps> = ({
 
   // Reset selections when product changes
   React.useEffect(() => {
-    setSelectedImage(0);
-    // Reset to first available pack size for the new product
-    const availableSizes = getAvailablePackSizes(selectedProductId);
-    if (
-      availableSizes.length > 0 &&
-      !availableSizes.find((size) => size.id === selectedPackSize)
-    ) {
-      setSelectedPackSize(availableSizes[0].id);
-    }
+    const handleScroll = () => {
+      if (!sectionRef.current) return;
+
+      const sectionBottom =
+        sectionRef.current.offsetTop + sectionRef.current.offsetHeight;
+      const scrollPosition = window.scrollY + window.innerHeight;
+
+      setShowStickyCart(scrollPosition > sectionBottom);
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
   }, [selectedProductId]);
 
   // Handle image navigation
   const goToNextImage = useCallback(() => {
+    if (!currentProduct) return;
     setSelectedImage((prev) =>
       prev === currentProduct.images.length - 1 ? 0 : prev + 1
     );
-  }, [currentProduct.images.length]);
+  }, [currentProduct]);
 
   const goToPrevImage = useCallback(() => {
+    if (!currentProduct) return;
     setSelectedImage((prev) =>
       prev === 0 ? currentProduct.images.length - 1 : prev - 1
     );
-  }, [currentProduct.images.length]);
+  }, [currentProduct]);
 
   // Touch event handlers for swipe functionality
   const handleTouchStart = (e: React.TouchEvent) => {
-    touchStartX.current = e.targetTouches[0].clientX;
+    if (e.targetTouches[0]) {
+      touchStartX.current = e.targetTouches[0].clientX;
+    }
     isDragging.current = false;
   };
 
   const handleTouchMove = (e: React.TouchEvent) => {
     if (!touchStartX.current) return;
 
-    const currentTouch = e.targetTouches[0].clientX;
+    const touch = e.targetTouches[0];
+    if (!touch) return;
+
+    const currentTouch = touch.clientX;
     const diff = touchStartX.current - currentTouch;
 
     // If user has moved more than 10px, consider it a drag
@@ -127,7 +139,10 @@ const ProductDetailPage: React.FC<ProductDetailPageProps> = ({
   const handleTouchEnd = (e: React.TouchEvent) => {
     if (!isDragging.current) return;
 
-    touchEndX.current = e.changedTouches[0].clientX;
+    const touch = e.changedTouches[0];
+    if (!touch) return;
+
+    touchEndX.current = touch.clientX;
     handleSwipe();
   };
 
@@ -163,9 +178,9 @@ const ProductDetailPage: React.FC<ProductDetailPageProps> = ({
       content: (
         <div className="space-y-4">
           <div>
-            <h4 className="font-semibold mb-2">{currentProduct.name}</h4>
+            <h4 className="font-semibold mb-2">{currentProduct?.name}</h4>
             <p className="text-sm text-gray-600">
-              {currentProduct.ingredients}
+              {currentProduct?.ingredients}
             </p>
           </div>
         </div>
@@ -176,88 +191,90 @@ const ProductDetailPage: React.FC<ProductDetailPageProps> = ({
       title: "Nutrition Facts",
       content: (
         <div className="border border-gray-300 p-4 text-xs max-w-md">
-          <h4 className="font-bold mb-2">{currentProduct.name}</h4>
+          <h4 className="font-bold mb-2">{currentProduct?.name}</h4>
           <p className="mb-2">
-            Amount per serving {currentProduct.nutritionFacts.servingSize}
+            Amount per serving {currentProduct?.nutritionFacts.servingSize}
           </p>
           <div className="border-b border-gray-400 pb-1 mb-2">
             <span className="font-bold text-lg">
-              {currentProduct.nutritionFacts.calories} Calories
+              {currentProduct?.nutritionFacts.calories} Calories
             </span>
             <span className="float-right font-bold">% Daily Value*</span>
           </div>
           <div className="space-y-1">
             <div className="flex justify-between">
-              <span>Total Fat {currentProduct.nutritionFacts.totalFat}</span>
+              <span>Total Fat {currentProduct?.nutritionFacts.totalFat}</span>
               <span>0%</span>
             </div>
             <div className="flex justify-between pl-4">
               <span>
-                Saturated Fat {currentProduct.nutritionFacts.saturatedFat}
+                Saturated Fat {currentProduct?.nutritionFacts.saturatedFat}
               </span>
               <span>0%</span>
             </div>
             <div className="pl-4">
-              Trans Fat {currentProduct.nutritionFacts.transFat}
+              Trans Fat {currentProduct?.nutritionFacts.transFat}
             </div>
             <div className="flex justify-between">
               <span>
-                Cholesterol {currentProduct.nutritionFacts.cholesterol}
+                Cholesterol {currentProduct?.nutritionFacts.cholesterol}
               </span>
               <span>0%</span>
             </div>
             <div className="flex justify-between">
-              <span>Sodium {currentProduct.nutritionFacts.sodium}</span>
+              <span>Sodium {currentProduct?.nutritionFacts.sodium}</span>
               <span>0%</span>
             </div>
             <div className="flex justify-between">
               <span>
-                Total Carbohydrate {currentProduct.nutritionFacts.totalCarbs}
+                Total Carbohydrate {currentProduct?.nutritionFacts.totalCarbs}
               </span>
               <span>
-                {currentProduct.nutritionFacts.totalCarbs === "10g"
+                {currentProduct?.nutritionFacts.totalCarbs === "10g"
                   ? "4%"
                   : "3%"}
               </span>
             </div>
             <div className="flex justify-between pl-4">
               <span>
-                Dietary Fiber {currentProduct.nutritionFacts.dietaryFiber}
+                Dietary Fiber {currentProduct?.nutritionFacts.dietaryFiber}
               </span>
               <span>0%</span>
             </div>
             <div className="pl-4">
-              Total Sugars {currentProduct.nutritionFacts.totalSugars}
+              Total Sugars {currentProduct?.nutritionFacts.totalSugars}
             </div>
             <div className="flex justify-between pl-8">
               <span>
-                Includes {currentProduct.nutritionFacts.addedSugars} Added
+                Includes {currentProduct?.nutritionFacts.addedSugars} Added
                 Sugars
               </span>
               <span>
-                {currentProduct.nutritionFacts.addedSugars === "8g"
+                {currentProduct?.nutritionFacts.addedSugars === "8g"
                   ? "16%"
                   : "14%"}
               </span>
             </div>
             <div className="flex justify-between">
-              <span>Protein {currentProduct.nutritionFacts.protein}</span>
+              <span>Protein {currentProduct?.nutritionFacts.protein}</span>
             </div>
             <div className="border-t border-gray-400 pt-2 mt-2 space-y-1">
               <div className="flex justify-between">
-                <span>Vitamin D {currentProduct.nutritionFacts.vitaminD}</span>
+                <span>Vitamin D {currentProduct?.nutritionFacts.vitaminD}</span>
                 <span>0%</span>
               </div>
               <div className="flex justify-between">
-                <span>Calcium {currentProduct.nutritionFacts.calcium}</span>
+                <span>Calcium {currentProduct?.nutritionFacts.calcium}</span>
                 <span>0%</span>
               </div>
               <div className="flex justify-between">
-                <span>Iron {currentProduct.nutritionFacts.iron}</span>
+                <span>Iron {currentProduct?.nutritionFacts.iron}</span>
                 <span>0%</span>
               </div>
               <div className="flex justify-between">
-                <span>Potassium {currentProduct.nutritionFacts.potassium}</span>
+                <span>
+                  Potassium {currentProduct?.nutritionFacts.potassium}
+                </span>
                 <span>0%</span>
               </div>
             </div>
@@ -320,7 +337,11 @@ const ProductDetailPage: React.FC<ProductDetailPageProps> = ({
   };
 
   return (
-    <section className={`bg-cream-50 py-16 px-6 ${className}`} id="product">
+    <section
+      ref={sectionRef}
+      className={`bg-cream-50 py-16 px-6 ${className}`}
+      id="product"
+    >
       <div className="max-w-7xl mx-auto">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16">
           {/* Product Images */}
@@ -335,9 +356,9 @@ const ProductDetailPage: React.FC<ProductDetailPageProps> = ({
             >
               <AnimatePresence mode="wait">
                 <motion.img
-                  key={`${currentProduct.id}-${selectedImage}`}
-                  src={currentProduct.images[selectedImage]?.src}
-                  alt={currentProduct.images[selectedImage]?.alt}
+                  key={`${currentProduct?.id}-${selectedImage}`}
+                  src={currentProduct?.images[selectedImage]?.src}
+                  alt={currentProduct?.images[selectedImage]?.alt}
                   className="w-full h-full object-contain pointer-events-none"
                   draggable={false}
                   initial={{ opacity: 0, x: 20 }}
@@ -352,7 +373,7 @@ const ProductDetailPage: React.FC<ProductDetailPageProps> = ({
 
               {/* Swipe indicators for mobile */}
               <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex space-x-2 md:hidden">
-                {currentProduct.images.map((_, index) => (
+                {currentProduct?.images.map((_, index) => (
                   <motion.div
                     key={index}
                     className={`w-2 h-2 rounded-full ${
@@ -369,7 +390,7 @@ const ProductDetailPage: React.FC<ProductDetailPageProps> = ({
 
             {/* Thumbnail Images */}
             <div className="flex space-x-4">
-              {currentProduct.images.map((image, index) => (
+              {currentProduct?.images.map((image, index) => (
                 <motion.button
                   key={image.id}
                   onClick={() => setSelectedImage(index)}
@@ -397,19 +418,19 @@ const ProductDetailPage: React.FC<ProductDetailPageProps> = ({
             {/* Header */}
             <div>
               <h2 className="text-5xl md:text-6xl font-bold text-foreground font-heading mb-4 uppercase">
-                {currentProduct.name}
+                {currentProduct?.title}
               </h2>
               <Badge className="bg-[#ffe25d] text-black mb-4 rounded-full px-4 py-1">
-                Offer / Order 12-Pack And Save XX
+                FREE SHIPPING ON ALL ORDERS OVER $100
               </Badge>
               <p className="text-lg text-gray-700 mb-6">
-                {currentProduct.description}
+                {currentProduct?.description}
               </p>
               {/* Benefits */}
               <div className="space-y-2">
-                {currentProduct.benefits.map((benefit) => (
+                {currentProduct?.benefits.map((benefit) => (
                   <div key={benefit} className="flex items-center space-x-2">
-                    <Check className="w-5 h-5 text-green-600" />
+                    ✅{/* <Check className="w-5 h-5 text-green-600" /> */}
                     <span className="text-gray-700">{benefit}</span>
                   </div>
                 ))}
@@ -520,19 +541,32 @@ const ProductDetailPage: React.FC<ProductDetailPageProps> = ({
                         </div>
                         <div className="text-right">
                           <span className="font-bold">
-                            ${currentPrice.current}
-                          </span>
-                          {currentPrice.original && (
-                            <span className="text-gray-500 line-through ml-2">
-                              ${currentPrice.original}
-                            </span>
-                          )}
-                          {currentPrice.compareAtPrice &&
-                            !currentPrice.original && (
-                              <span className="text-gray-500 line-through ml-2">
-                                ${currentPrice.compareAtPrice}
-                              </span>
+                            {option.discountPercent ? (
+                              <>
+                                {" "}
+                                <span className="line-through opacity-80 font-light">
+                                  $
+                                  {Math.floor(
+                                    typeof currentPrice.original === "string"
+                                      ? parseFloat(currentPrice.original)
+                                      : currentPrice.original
+                                  )}
+                                </span>{" "}
+                                $
+                                {Math.floor(
+                                  (typeof currentPrice.original === "string"
+                                    ? parseFloat(currentPrice.original)
+                                    : currentPrice.original) *
+                                    (1 -
+                                      parseFloat(option.discountPercent) /
+                                        100) *
+                                    100
+                                ) / 100}
+                              </>
+                            ) : (
+                              `$${Math.floor(typeof currentPrice.original === "string" ? parseFloat(currentPrice.original) : currentPrice.original)}`
                             )}
+                          </span>
                         </div>
                       </div>
                       {option.benefits && (
@@ -583,7 +617,7 @@ const ProductDetailPage: React.FC<ProductDetailPageProps> = ({
                 <div className="flex items-center justify-center space-x-6 text-sm  font-heading">
                   <div className="flex items-center space-x-2">
                     <Truck className="w-4 h-4" />
-                    <span>FREE SHIPPING ON 24 PACKS</span>
+                    <span>FREE SHIPPING OVER $100</span>
                   </div>
                   <div className="flex items-center space-x-2">
                     <ShieldCheck className="w-4 h-4" />
@@ -592,6 +626,37 @@ const ProductDetailPage: React.FC<ProductDetailPageProps> = ({
                 </div>
               </div>
             </form>
+
+            {/* Sticky Add to Cart for Mobile */}
+            <AnimatePresence>
+              {showStickyCart && (
+                <motion.div
+                  initial={{ y: 100, opacity: 0 }}
+                  animate={{ y: 0, opacity: 1 }}
+                  exit={{ y: 100, opacity: 0 }}
+                  transition={{ duration: 0.3, ease: "easeOut" }}
+                  className="fixed bottom-[-35px] left-0 right-0 bg-background border-t border-gray-200 p-4 z-50 md:hidden"
+                >
+                  <Button
+                    onClick={handleSubmit}
+                    className="w-full bg-foreground font-heading text-white px-8 py-6 text-lg font-semibold transition-colors rounded-full cursor-pointer"
+                  >
+                    ADD TO CART ${currentPrice.current}
+                  </Button>
+                  {/* Trust Badges */}
+                  <div className="flex items-center justify-center space-x-6 text-sm font-heading pt-2">
+                    <div className="flex items-center space-x-2">
+                      <Truck className="w-4 h-4" />
+                      <span>FREE SHIPPING ON OVER $100</span>
+                    </div>
+                    <div className="flex items-center space-x-2">
+                      <ShieldCheck className="w-4 h-4" />
+                      <span>SECURE PAYMENTS</span>
+                    </div>
+                  </div>
+                </motion.div>
+              )}
+            </AnimatePresence>
 
             {/* Customer Review */}
             <Card className="p-6 bg-white border border-gray-200 flex flex-col gap-1 shadow-none border-none">

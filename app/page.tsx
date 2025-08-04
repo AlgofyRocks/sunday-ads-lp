@@ -68,7 +68,11 @@ export default function HomePage() {
         <LPSubscription />
       </FadeInSection>
       <FAQSection />
-      <LPNewsletter />
+      <LPNewsletter
+        klaviyoListId={"XdF2sD"}
+        klaviyoPublicKey="VFXVmg"
+        useServerSide={false}
+      />
       <LPFeed />
       <LPFooter />
     </>

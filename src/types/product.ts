@@ -34,6 +34,7 @@ export interface ProductVariant {
 
 export interface Product {
   id: string;
+  title: string;
   name: string;
   slug: string;
   description: string;
@@ -49,7 +50,6 @@ export interface PackSizeOption {
   id: string;
   size: string;
   label: string;
-  priceMultiplier: string; // Multiplier for base price
 }
 
 export interface PurchaseOption {
@@ -97,32 +97,26 @@ export const products: Product[] = [
   {
     id: "variety-pack",
     name: "The Variety Pack",
+    title: "The Variety Pack",
     slug: "variety-pack",
     description:
-      "A mellow mix for your mellow moments with flavors for every kind of SunDay™",
-    basePrice: "24.99",
+      "All your SunDay™ iced tea favorites with 3mg Delta-9 and 6mg CBD per can.",
+    basePrice: "56.00",
     variants: [
-      {
-        packSizeId: "6-pack",
-        variantId: "41611737923669",
-        price: "21.24",
-        compareAtPrice: "24.99",
-      },
       {
         packSizeId: "8-pack",
         variantId: "41611737956437",
-        price: "24.99",
+        price: "56.00",
       },
       {
         packSizeId: "12-pack",
         variantId: "41611737989205",
-        price: "30.24",
-        compareAtPrice: "35.99",
+        price: "84.00",
       },
       {
-        packSizeId: "24-pack",
+        packSizeId: "16-pack",
         variantId: "41611738021973",
-        price: "49.99",
+        price: "112.00",
       }
     ],
     images: [
@@ -172,10 +166,11 @@ export const products: Product[] = [
   {
     id: "classic",
     name: "Classic Iced Tea",
+    title: "Classic Iced Tea With Lemon",
     slug: "classic-iced-tea",
     description:
-      "Classic black tea with a hint of lemon - your traditional SunDay™ experience",
-    basePrice: "22.99",
+      "Black tea & lemon with 3mg THC & 6mg CBD, your citrusy buzz in a can",
+    basePrice: "56.00",
     images: [
       {
         id: "main",
@@ -196,99 +191,19 @@ export const products: Product[] = [
     ],
     variants: [
       {
-        packSizeId: "6-pack",
-        variantId: "41611734253653",
-        price: "19.54",
-        compareAtPrice: "22.99",
-      },
-      {
         packSizeId: "8-pack",
         variantId: "41611734286421",
-        price: "22.99",
-        compareAtPrice: "24.99",
+        price: "56.00",
       },
       {
         packSizeId: "12-pack",
         variantId: "41611734319189",
-        price: "27.54",
-        compareAtPrice: "30.99",
+        price: "84.00",
       },
       {
-        packSizeId: "24-pack",
+        packSizeId: "16-pack",
         variantId: "41611734351957",
-        price: "44.99",
-      }
-    ],
-    ingredients:
-      "Kosher & Vegan Friendly Black Tea (Filtered Water, Black Tea Extract), Granulated Cane Sugar, Lemon Juice, Concentrate, Natural Flavors, Plant-based functional ingredients",
-    nutritionFacts: {
-      servingSize: "1 can (12 fl oz / 355 mL)",
-      calories: "40",
-      totalFat: "0g",
-      saturatedFat: "0g",
-      transFat: "0g",
-      cholesterol: "0mg",
-      sodium: "0mg",
-      totalCarbs: "10g",
-      dietaryFiber: "0g",
-      totalSugars: "8g",
-      addedSugars: "8g",
-      protein: "0g",
-      vitaminD: "0mcg",
-      calcium: "0mg",
-      iron: "0mg",
-      potassium: "30mg",
-    },
-    benefits: ["Classic Black Tea", "Natural Lemon Flavor", "Vegan & Kosher"],
-  },
-  {
-    id: "half-half",
-    name: "Half & Half",
-    slug: "half-and-half",
-    description:
-      "Perfect balance of iced tea and lemonade for those who can't decide",
-    basePrice: "22.99",
-    images: [
-      {
-        id: "main",
-        src: ProductHalfHalf1.src,
-        alt: "SunDay Half & Half Iced Tea Lemonade Can",
-        isMain: true,
-      },
-      {
-        id: "lifestyle1",
-        src: ProductHalfHalf2.src,
-        alt: "Half & Half with lemon garnish",
-      },
-      {
-        id: "lifestyle2",
-        src: ProductHalfHalf3.src,
-        alt: "Half & Half lifestyle shot",
-      },
-    ],
-    variants: [
-      {
-        packSizeId: "6-pack",
-        variantId: "41611734417493",
-        price: "19.54",
-        compareAtPrice: "22.99",
-      },
-      {
-        packSizeId: "8-pack",
-        variantId: "41611734450261",
-        price: "22.99",
-        compareAtPrice: "24.99",
-      },
-      {
-        packSizeId: "12-pack",
-        variantId: "41611734483029",
-        price: "27.54",
-        compareAtPrice: "30.99",
-      },
-      {
-        packSizeId: "24-pack",
-        variantId: "41611734515797",
-        price: "44.99",
+        price: "112.00",
       }
     ],
     ingredients:
@@ -312,18 +227,88 @@ export const products: Product[] = [
       potassium: "30mg",
     },
     benefits: [
-      "Tea & Lemonade Blend",
-      "Perfectly Balanced",
-      "Refreshing Taste",
+      "No Artificial Ingredients",
+      "Refreshing & Low-Cal",
+      "All Natural Flavor",
+    ],
+  },
+  {
+    id: "half-half",
+    name: "Half & Half",
+    title: "Half & Half Iced Tea with Lemonade",
+    slug: "half-and-half",
+    description:
+      "Tea meets lemonade with 3mg THC & 6mg CBD for a low dose golden-hour vibe.",
+    basePrice: "56.00",
+    images: [
+      {
+        id: "main",
+        src: ProductHalfHalf1.src,
+        alt: "SunDay Half & Half Iced Tea Lemonade Can",
+        isMain: true,
+      },
+      {
+        id: "lifestyle1",
+        src: ProductHalfHalf2.src,
+        alt: "Half & Half with lemon garnish",
+      },
+      {
+        id: "lifestyle2",
+        src: ProductHalfHalf3.src,
+        alt: "Half & Half lifestyle shot",
+      },
+    ],
+    variants: [
+      {
+        packSizeId: "8-pack",
+        variantId: "41611734450261",
+        price: "56.00",
+      },
+      {
+        packSizeId: "12-pack",
+        variantId: "41611734483029",
+        price: "84.00",
+      },
+      {
+        packSizeId: "16-pack",
+        variantId: "41611734515797",
+        price: "112.00",
+      }
+    ],
+    ingredients:
+      "Kosher & Vegan Friendly Black Tea (Filtered Water, Black Tea Extract), Granulated Cane Sugar, Lemon Juice, Concentrate, Natural Flavors, Plant-based functional ingredients",
+    nutritionFacts: {
+      servingSize: "1 can (12 fl oz / 355 mL)",
+      calories: "40",
+      totalFat: "0g",
+      saturatedFat: "0g",
+      transFat: "0g",
+      cholesterol: "0mg",
+      sodium: "0mg",
+      totalCarbs: "10g",
+      dietaryFiber: "0g",
+      totalSugars: "8g",
+      addedSugars: "8g",
+      protein: "0g",
+      vitaminD: "0mcg",
+      calcium: "0mg",
+      iron: "0mg",
+      potassium: "30mg",
+    },
+    benefits: [
+      "No Artificial Ingredients",
+      "Refreshing & Low-Cal",
+      "All Natural Flavor",
     ],
   },
   {
     id: "peach",
     name: "Peach",
     slug: "peach-iced-tea",
+    title: "Peach Iced Tea",
     description:
-      "Sweet peach flavored black tea that tastes like summer in a can",
-    basePrice: "22.99",
+      "Juicy peach iced tea infused with 3mg THC & 6mg CBD for a smooth, mellow lift.",
+    basePrice: "56.00",
     images: [
       {
         id: "main",
@@ -344,28 +329,19 @@ export const products: Product[] = [
     ],
     variants: [
       {
-        packSizeId: "6-pack",
-        variantId: "41611734548565",
-        price: "19.54",
-        compareAtPrice: "22.99",
-      },
-      {
         packSizeId: "8-pack",
         variantId: "41611734581333",
-        price: "22.99",
-        compareAtPrice: "24.99",
+        price: "56.00",
       },
       {
         packSizeId: "12-pack",
         variantId: "41611734614101",
-        price: "27.54",
-        compareAtPrice: "30.99",
+        price: "84.00",
       },
       {
-        packSizeId: "24-pack",
+        packSizeId: "16-pack",
         variantId: "41611734646869",
-        price: "44.99",
-        compareAtPrice: "49.99",
+        price: "112.00",
       }
     ],
     ingredients:
@@ -388,15 +364,20 @@ export const products: Product[] = [
       iron: "0mg",
       potassium: "20mg",
     },
-    benefits: ["Natural Peach Flavor", "Sweet & Refreshing", "Summer Vibes"],
+    benefits: [
+      "No Artificial Ingredients",
+      "Refreshing & Low-Cal",
+      "All Natural Flavor",
+    ],
   },
   {
     id: "hibiscus",
     name: "Hibiscus",
+    title: "Hibiscus Iced Tea",
     slug: "hibiscus-iced-tea",
     description:
       "Floral and tart hibiscus tea with a beautiful deep red color",
-    basePrice: "22.99",
+    basePrice: "56.00",
     images: [
       {
         id: "main",
@@ -417,28 +398,19 @@ export const products: Product[] = [
     ],
     variants: [
       {
-        packSizeId: "6-pack",
-        variantId: "41611734679637",
-        price: "19.54",
-        compareAtPrice: "22.99",
-      },
-      {
         packSizeId: "8-pack",
         variantId: "41611734712405",
-        price: "22.99",
-        compareAtPrice: "24.99",
+        price: "56.00",
       },
       {
         packSizeId: "12-pack",
         variantId: "41611734745173",
-        price: "27.54",
-        compareAtPrice: "30.99",
+        price: "84.00",
       },
       {
-        packSizeId: "24-pack",
+        packSizeId: "16-pack",
         variantId: "41611734777941",
-        price: "44.99",
-        compareAtPrice: "49.99",
+        price: "112.00",
       }
     ],
     ingredients:
@@ -462,18 +434,17 @@ export const products: Product[] = [
       potassium: "0mg",
     },
     benefits: [
-      "Floral Hibiscus",
-      "Antioxidant Rich",
-      "Naturally Caffeine-Free",
+      "No Artificial Ingredients",
+      "Refreshing & Low-Cal",
+      "All Natural Flavor",
     ],
   },
 ];
 
 export const packSizeOptions: PackSizeOption[] = [
-  { id: "6-pack", size: "6", label: "6 pack", priceMultiplier: "0.85" },
-  { id: "8-pack", size: "8", label: "8 Pack", priceMultiplier: "1.0" },
-  { id: "12-pack", size: "12", label: "12 pack", priceMultiplier: "1.35" },
-  { id: "24-pack", size: "24", label: "24 Pack", priceMultiplier: "2.5" },
+  { id: "8-pack", size: "8", label: "8 Pack" },
+  { id: "12-pack", size: "12", label: "12 pack" },
+  { id: "16-pack", size: "16", label: "16 Pack" },
 ];
 
 export const purchaseOptions: PurchaseOption[] = [
