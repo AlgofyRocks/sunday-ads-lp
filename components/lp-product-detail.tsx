@@ -21,6 +21,7 @@ const ProductDetailPage: React.FC<ProductDetailPageProps> = ({
 }) => {
   // State management
   const [selectedImage, setSelectedImage] = useState(0);
+  const [isSpinning, setIsSpinning] = useState(false);
   const [selectedProductId, setSelectedProductId] = useState("variety-pack");
   const [selectedPackSize, setSelectedPackSize] = useState("8-pack");
   const [selectedPurchaseType, setSelectedPurchaseType] = useState("onetime");
@@ -301,6 +302,7 @@ const ProductDetailPage: React.FC<ProductDetailPageProps> = ({
   };
 
   const handleSubmit = (e: React.FormEvent) => {
+    setIsSpinning(true);
     e.preventDefault();
 
     // Get the variant ID for the selected combination
@@ -610,7 +612,11 @@ const ProductDetailPage: React.FC<ProductDetailPageProps> = ({
                     type="submit"
                     className="flex-1 bg-foreground font-heading text-white px-8 py-8 text-xl font-semibold  transition-colors rounded-full cursor-pointer"
                   >
-                    ADD TO CART ${currentPrice.current}
+                    {isSpinning ? (
+                      <div className="w-6 h-6 border-4 border-white border-t-transparent border-b-transparent rounded-full animate-spin mx-auto"></div>
+                    ) : (
+                      `ADD TO CART $${currentPrice.current}`
+                    )}
                   </Button>
                 </div>
                 {/* Trust Badges */}
@@ -641,7 +647,11 @@ const ProductDetailPage: React.FC<ProductDetailPageProps> = ({
                     onClick={handleSubmit}
                     className="w-full bg-foreground font-heading text-white px-8 py-6 text-lg font-semibold transition-colors rounded-full cursor-pointer"
                   >
-                    ADD TO CART ${currentPrice.current}
+                    {isSpinning ? (
+                      <div className="w-6 h-6 border-4 border-white border-t-transparent border-b-transparent rounded-full animate-spin mx-auto"></div>
+                    ) : (
+                      `ADD TO CART $${currentPrice.current}`
+                    )}
                   </Button>
                   {/* Trust Badges */}
                   <div className="flex items-center justify-center space-x-6 text-sm font-heading pt-2">
