@@ -1,6 +1,7 @@
 "use client";
 import NewsletterImage from "@/../public/lp/newsletter_image.webp";
 import { Button } from "@/components/ui/button";
+import Link from "next/link";
 import React, { useState } from "react";
 
 interface NewsletterSubscriptionProps {
@@ -493,8 +494,7 @@ const LPNewsletter: React.FC<NewsletterSubscriptionProps> = ({
 
               {/* Additional Info */}
               <p className="text-white/70 text-sm mt-6">
-                Join thousands of subscribers for exclusive updates, early
-                access, and special offers.
+                Be the first to get the tea with 20% off
               </p>
             </>
           ) : (
@@ -517,12 +517,18 @@ const LPNewsletter: React.FC<NewsletterSubscriptionProps> = ({
                 </svg>
               </div>
               <h3 className="text-white text-3xl md:text-4xl font-bold mb-4">
-                Welcome to the Vibe!
+                You&apos;re In! Let the SunDay™ Begin.
               </h3>
               <p className="text-white/90 text-lg mb-8 max-w-lg mx-auto">
-                You're all set! Keep an eye on your inbox for exclusive updates
-                and early access to new flavors.
+                Your 20% off code is chillin&apos; in your inbox.
               </p>
+
+              <Link
+                href="#product"
+                className="bg-[#ffe25d] py-4 px-12 font-heading rounded-full text-xl w-fit md:px-12 "
+              >
+                SHOP SUNDAY
+              </Link>
             </div>
           )}
         </div>

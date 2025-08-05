@@ -432,8 +432,8 @@ const ProductDetailPage: React.FC<ProductDetailPageProps> = ({
               <div className="space-y-2">
                 {currentProduct?.benefits.map((benefit) => (
                   <div key={benefit} className="flex items-center space-x-2">
-                    ✅{/* <Check className="w-5 h-5 text-green-600" /> */}
-                    <span className="text-gray-700">{benefit}</span>
+                    ✅{/* <Check className="w-5 h-5 text-green-600" /> */}{" "}
+                    <span className="text-gray-700 ml-1">{benefit}</span>
                   </div>
                 ))}
               </div>
@@ -722,7 +722,7 @@ const ProductDetailPage: React.FC<ProductDetailPageProps> = ({
                     style={{ overflow: "hidden" }}
                   >
                     <div className="px-6 pb-4">
-                      <div className="text-gray-700 leading-relaxed">
+                      <div className=" ">
                         {typeof item.content === "string" ? (
                           <p>{item.content}</p>
                         ) : (

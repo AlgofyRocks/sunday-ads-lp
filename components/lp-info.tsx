@@ -31,7 +31,7 @@ const LPInfo = () => {
                 />
               </svg>
             </div>
-            <h3 className="text-xl font-bold uppercase tracking-wider">
+            <h3 className="text-2xl font-bold uppercase font-heading tracking-wide">
               How Much Should I Drink?
             </h3>
             <p className="text-md leading-relaxed max-w-xs">
@@ -142,7 +142,7 @@ const LPInfo = () => {
                 </defs>
               </svg>
             </div>
-            <h3 className="text-xl font-bold uppercase tracking-wider">
+            <h3 className="text-2xl font-bold uppercase tracking-wide  font-heading">
               Is This Legal?
             </h3>
             <p className="text-md leading-relaxed max-w-xs">
@@ -181,7 +181,7 @@ const LPInfo = () => {
                 </defs>
               </svg>
             </div>
-            <h3 className="text-xl font-bold uppercase tracking-wider">
+            <h3 className="text-2xl font-bold uppercase tracking-wide  font-heading">
               Is This Safe and Healthy?
             </h3>
             <p className="text-md leading-relaxed max-w-xs">

@@ -100,7 +100,7 @@ export const products: Product[] = [
     title: "The Variety Pack",
     slug: "variety-pack",
     description:
-      "All your SunDay™ iced tea favorites with 3mg Delta-9 and 6mg CBD per can.",
+      "All your SunDay™ iced tea favorites with a zero-regret buzz. ",
     basePrice: "56.00",
     variants: [
       {
@@ -169,7 +169,7 @@ export const products: Product[] = [
     title: "Classic Iced Tea With Lemon",
     slug: "classic-iced-tea",
     description:
-      "Black tea & lemon with 3mg THC & 6mg CBD, your citrusy buzz in a can",
+      "Classic black tea & lemon with a subtle lift.",
     basePrice: "56.00",
     images: [
       {
@@ -238,7 +238,7 @@ export const products: Product[] = [
     title: "Half & Half Iced Tea with Lemonade",
     slug: "half-and-half",
     description:
-      "Tea meets lemonade with 3mg THC & 6mg CBD for a low dose golden-hour vibe.",
+      "Tea meets lemonade for a low dose golden-hour vibe.",
     basePrice: "56.00",
     images: [
       {
@@ -307,7 +307,7 @@ export const products: Product[] = [
     slug: "peach-iced-tea",
     title: "Peach Iced Tea",
     description:
-      "Juicy peach iced tea infused with 3mg THC & 6mg CBD for a smooth, mellow lift.",
+      "Juicy peach iced tea for a smooth, mellow lift.",
     basePrice: "56.00",
     images: [
       {
@@ -376,7 +376,7 @@ export const products: Product[] = [
     title: "Hibiscus Iced Tea",
     slug: "hibiscus-iced-tea",
     description:
-      "Floral and tart hibiscus tea with a beautiful deep red color",
+      "Floral & tart, it's your new favorite ritual.",
     basePrice: "56.00",
     images: [
       {

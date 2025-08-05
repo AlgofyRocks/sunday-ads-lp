@@ -62,7 +62,7 @@ const LPMarquee: React.FC<MarqueeBannerProps> = ({
 
   return (
     <div
-      className={`bg-[#75af87] py-4 overflow-hidden whitespace-nowrap ${className} mt-0 relative bottom-[1px]`}
+      className={`bg-[#75af87] py-4 overflow-hidden whitespace-nowrap ${className} mt-0 relative bottom-[1px] font-heading`}
     >
       <div
         className="inline-flex items-center animate-marquee gap-4 "
@@ -73,7 +73,7 @@ const LPMarquee: React.FC<MarqueeBannerProps> = ({
         {[...items, ...items, ...items, ...items].map((item, index) => (
           <React.Fragment key={index}>
             <SunIcon />
-            <span className="text-white text-lg font-bold uppercase tracking-wider mr-8">
+            <span className="text-white text-xl font-bold uppercase tracking-wider mr-8">
               {item}
             </span>
           </React.Fragment>

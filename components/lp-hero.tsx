@@ -116,25 +116,25 @@ export default function LPHero() {
   ];
   return (
     <FadeInSection className="md:bg-gradient-to-r md:from-[#017c9f] to-[#41a7cf]">
-      <div className="relative flex flex-col items-center justify-start  md:flex-row md:justify-between overflow-y-hidden max-w-7xl mx-auto">
-        <div className="relative z-10  w-full pt-6">
+      <div className="relative flex flex-col items-center justify-start  md:flex-row md:justify-between overflow-y-hidden  mx-auto">
+        <div className="relative z-10  w-full pt-6 max-w-7xl mx-auto">
           <h1 className="text-5xl font-heading   px-4 text-center  text-white md:text-start">
             GET A TASTE OF <br /> SUNDAY™ EVERY DAY
           </h1>
 
-          <p className="px-4 text-center font-medium  text-white md:text-start md:my-8">
+          <p className="px-4 text-center font-medium  text-white md:text-start md:my-8 mt-2">
             Sunday™ iced teas are your new favorite way to unwind{" "}
             <br className="md:block hidden" />
             with good vibes minus the next-day regrets.
           </p>
-          <div className="flex justify-center items-center md:w-fit md:items-center gap-2 flex-col my-8 px-4 md:mb-8 ">
+          <div className="flex justify-center items-center md:w-fit md:items-center gap-2 flex-col mt-4 px-4 md:mb-8 ">
             <Link
               href="#product"
               className="bg-[#ffe25d] py-4 px-12 font-heading rounded-full text-2xl w-fit md:px-24 "
             >
               SHOP SUNDAY
             </Link>
-            <p className="font-heading uppercase flex items-center justify-center gap-2 md:text-white text-sm">
+            <p className="font-heading uppercase flex items-center justify-center gap-2 md:text-white text-sm mb-12">
               <Truck /> Free Shipping over $100
             </p>
           </div>
@@ -165,8 +165,8 @@ export default function LPHero() {
         <div className=" absolute  z-0 hidden sm:block h-full w-full">
           <Image
             src={DesktopHero}
-            width={1280}
-            height={700}
+            width={2440}
+            height={1280}
             alt="Mobile Hero Image"
             loading="eager"
             className="object-cover w-full h-full"

@@ -93,7 +93,7 @@ const LPTestimonials: React.FC<TestimonialsSectionProps> = ({
     {
       id: 1,
       rating: 5,
-      text: "FINALLY! A delicious functional drink that isn't a seltzer. I loved the tea options when I was still drinking alcohol and am ecstatic someone finally made them.",
+      text: "FINALLY! A delicious functional drink that isn't a seltzer. I loved the tea options when I was still drinking b**ze and am ecstatic someone finally made them.",
       author: "John S.",
       verified: true,
     },

@@ -45,11 +45,11 @@ export default function LPNav() {
         </li>
       </ul>
 
-      <LogoIcon className=" h-12 w-full md:w-full" />
+      <LogoIcon className="h-12 lg:h-14 w-full md:w-full" />
       <div className="md:w-full flex justify-end items-center">
         <Link
           href="#product"
-          className="bg-transparent rounded-full border-foreground uppercase text-foreground font-bold border-[1px] text-sm md:text-md px-3 py-3 text-nowrap"
+          className="bg-transparent rounded-full border-foreground uppercase text-foreground font-bold border-[1px] text-md md:text-lg px-3 py-3 lg:px-6 text-nowrap font-heading"
         >
           SHOP SUNDAY
         </Link>

@@ -88,7 +88,7 @@ const LPSubscription: React.FC<SubscriptionCTASectionProps> = ({
           />
         </svg>
       ),
-      title: "FREE SHIPPING ON 24 PACKS",
+      title: "FREE SHIPPING OVER $100",
     },
   ],
   onButtonClick,

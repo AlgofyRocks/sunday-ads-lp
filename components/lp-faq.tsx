@@ -43,13 +43,13 @@ const FAQSection: React.FC<FAQSectionProps> = ({
       id: "what-is-sunday",
       question: "What is SunDay™? And why is it called SunDay™?",
       answer:
-        "SunDay is a 12oz iced tea infused with naturally derived, feel-good ingredients, crafted to give you a light, social buzz without the crash. It's your easygoing drink for unwinding, vibing, or just adding a little lift to your day. We call it SunDay because it feels like one: relaxed, warm, and exactly what you needed. It's not about the calendar, it's about the energy.",
+        "SunDay™ is a 12oz iced tea infused with naturally derived, feel-good ingredients, crafted to give you a light, social buzz without the crash. It's your easygoing drink for unwinding, vibing, or just adding a little lift to your day. We call it SunDay™ because it feels like one: relaxed, warm, and exactly what you needed. It's not about the calendar, it's about the energy.",
     },
     {
       id: "products-flavors",
       question: "What are the different products and flavors?",
       answer:
-        "SunDay comes in a variety of 12oz iced tea blends, each made with real fruit juice and natural ingredients. Flavors include Black Tea with a hint of Lemon, Black Tea & Lemonade (Half&Half), Sweet Peach Tea, and Hibiscus Cranberry. Keep an eye out for limited seasonal drops too, we like to mix it up.",
+        "SunDay™ comes in a variety of 12oz iced tea blends, each made with real fruit juice and natural ingredients. Flavors include Black Tea with a hint of Lemon, Black Tea & Lemonade (Half&Half), Sweet Peach Tea, and Hibiscus Cranberry. Keep an eye out for limited seasonal drops too, we like to mix it up.",
     },
     {
       id: "how-many",

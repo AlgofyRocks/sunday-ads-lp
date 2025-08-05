@@ -48,14 +48,14 @@ export default function HomePage() {
 
       <LPMarquee />
 
-      <FadeInSection id="how-it-feels">
+      <FadeInSection id="whats-in-the-can">
         <LPImageTextSection imageUrl={ImageWithText1.src} />
       </FadeInSection>
 
-      <FadeInSection id="whats-in-the-can">
+      <FadeInSection id="how-it-feels">
         <LPImageTextSection
           title="WHAT DOES A SUNDAY™ FEEL LIKE"
-          description="Like an exhale on a sunny day — light, lifted, and just the right amount of float. I'ts the social ease of a drink with friends, minus the next-day regrets."
+          description="Like an exhale on a sunny day — light, lifted, and just the right amount of float. It's the social ease of a drink with friends, minus the next-day regrets."
           imagePosition="left"
           imageUrl={ImageWithText2.src}
         />

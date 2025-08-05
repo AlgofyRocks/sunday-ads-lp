@@ -58,9 +58,7 @@ export default async function RootLayout({
       <body
         className={`text-foreground bg-background ${acuminFont.variable} ${riftFont.variable}`}
       >
-        <main>
-          {children}
-        </main>
+        <main className="font-body">{children}</main>
       </body>
     </html>
   );
