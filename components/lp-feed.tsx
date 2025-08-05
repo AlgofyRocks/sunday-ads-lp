@@ -29,7 +29,7 @@ import Link from "next/link";
 
 const LPFeed: React.FC<CommunityGallerySectionProps> = ({
   title = "OUR CANNA-CURIOUS COMMUNITY",
-  socialHandle = "@drinksunday",
+  socialHandle = "@drinkasunday",
   className = "",
   images = [
     {
