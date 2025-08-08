@@ -18,6 +18,9 @@ const AgeGate: React.FC<AgeGateProps> = ({ onVerified, className = "" }) => {
   });
 
   React.useEffect(() => {
+    if (typeof window !== "undefined") {
+      window.location.href = "https://drinkasunday.com";
+    }
     if (isVerified) {
       setShowAgegate(false);
       if (onVerified) onVerified();
