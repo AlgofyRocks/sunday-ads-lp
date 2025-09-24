@@ -105,17 +105,17 @@ export const products: Product[] = [
     variants: [
       {
         packSizeId: "8-pack",
-        variantId: "41611737956437",
+        variantId: "41679256191061",
         price: "56.00",
       },
       {
         packSizeId: "12-pack",
-        variantId: "41611737989205",
+        variantId: "41679256223829",
         price: "84.00",
       },
       {
         packSizeId: "16-pack",
-        variantId: "41611738021973",
+        variantId: "41679256256597",
         price: "112.00",
       }
     ],
@@ -192,17 +192,17 @@ export const products: Product[] = [
     variants: [
       {
         packSizeId: "8-pack",
-        variantId: "41611734286421",
+        variantId: "41711465267285",
         price: "56.00",
       },
       {
         packSizeId: "12-pack",
-        variantId: "41611734319189",
+        variantId: "41711465300053",
         price: "84.00",
       },
       {
         packSizeId: "16-pack",
-        variantId: "41611734351957",
+        variantId: "41711465332821",
         price: "112.00",
       }
     ],
@@ -468,7 +468,7 @@ export const purchaseOptions: PurchaseOption[] = [
 
 // Configuration constants
 const SHOPIFY_BASE_URL = "https://drinkasunday.com";
-const SUBSCRIPTION_SELLING_PLAN_ID = "7016284245";
+const SUBSCRIPTION_SELLING_PLAN_ID = "7034929237";
 
 // Utility function to get variant by product and pack size
 export const getVariant = (productId: string, packSize: string): ProductVariant | null => {
