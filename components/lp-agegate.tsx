@@ -84,14 +84,14 @@ const AgeGate: React.FC<AgeGateProps> = ({ onVerified, className = "" }) => {
         <p className="text-sm text-gray-600">
           By entering this website you are agreeing to the{" "}
           <a
-            href="/terms"
+            href="https://drinkasunday.com/pages/terms-of-use"
             className="text-[#1e3a5f] underline hover:no-underline"
           >
             Terms & Conditions
           </a>{" "}
           and{" "}
           <a
-            href="/privacy"
+            href="https://drinkasunday.com/pages/privacy-policy"
             className="text-[#1e3a5f] underline hover:no-underline"
           >
             Privacy Policy
