@@ -615,7 +615,7 @@ const ProductDetailPage: React.FC<ProductDetailPageProps> = ({
                     {isSpinning ? (
                       <div className="w-6 h-6 border-4 border-white border-t-transparent border-b-transparent rounded-full animate-spin mx-auto"></div>
                     ) : (
-                      `ADD TO CART $${currentPrice.current}`
+                      `SHOP NOW $${currentPrice.current}`
                     )}
                   </Button>
                 </div>
@@ -650,7 +650,7 @@ const ProductDetailPage: React.FC<ProductDetailPageProps> = ({
                     {isSpinning ? (
                       <div className="w-6 h-6 border-4 border-white border-t-transparent border-b-transparent rounded-full animate-spin mx-auto"></div>
                     ) : (
-                      `ADD TO CART $${currentPrice.current}`
+                      `SHOP NOW $${currentPrice.current}`
                     )}
                   </Button>
                   {/* Trust Badges */}
