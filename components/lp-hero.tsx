@@ -132,7 +132,7 @@ export default function LPHero() {
               href="#product"
               className="bg-[#ffe25d] py-4 px-12 font-heading rounded-full text-2xl w-fit md:px-24 "
             >
-              SHOP SUNDAY
+              SHOP NOW
             </Link>
             <p className="font-heading uppercase flex items-center justify-center gap-2 md:text-white text-sm mb-12">
               <Truck /> Free Shipping over $100

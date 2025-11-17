@@ -74,7 +74,7 @@ import VarietyImage1 from "@/../public/products/variety_1.png";
 import VarietyImage2 from "@/../public/products/variety_2.webp";
 import VarietyImage3 from "@/../public/products/variety_3.webp";
 
-import ProductPeach1 from "@/../public/products/peach_1.webp";
+import ProductPeach1 from "@/../public/products/peach_1.png";
 import ProductPeach2 from "@/../public/products/peach_2.webp";
 import ProductPeach3 from "@/../public/products/peach_3.webp";
 
