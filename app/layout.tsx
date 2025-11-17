@@ -1,10 +1,10 @@
 import { GeistSans } from "geist/font/sans";
 import { baseUrl } from "lib/utils";
 import { ReactNode } from "react";
+import Script from "next/script";
 import "./globals.css";
 
 const { SITE_NAME } = process.env;
-
 import localFont from "next/font/local";
 
 const riftFont = localFont({
@@ -49,14 +49,33 @@ export default async function RootLayout({
 }: {
   children: ReactNode;
 }) {
-  // Don't await the fetch, pass the Promise to the context provider
-  // const cart = getCart();
-
   return (
     <html lang="en" className={GeistSans.variable}>
+      <head>
+        {/* GTM Script no head com strategy="beforeInteractive" */}
+        <Script id="google-tag-manager" strategy="beforeInteractive">
+          {`
+            (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+            new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+            j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+            'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+            })(window,document,'script','dataLayer','GTM-NZQF2BJP');
+          `}
+        </Script>
+      </head>
       <body
         className={`text-foreground bg-background ${acuminFont.variable} ${riftFont.variable}`}
       >
+        {/* GTM - noscript logo após a tag <body> */}
+        <noscript>
+          <iframe 
+            src="https://www.googletagmanager.com/ns.html?id=GTM-NZQF2BJP"
+            height="0" 
+            width="0" 
+            style={{ display: 'none', visibility: 'hidden' }}
+          />
+        </noscript>
+
         <main className="font-body">{children}</main>
       </body>
     </html>
