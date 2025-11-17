@@ -11,7 +11,6 @@ import Social_Five from "@/../public/lp/TestimonialCard-5.webp";
 import Social_Six from "@/../public/lp/TestimonialCard-6.webp";
 import Social_Seven from "@/../public/lp/TestimonialCard-7.webp";
 import Social_Eight from "@/../public/lp/TestimonialCard-8.webp";
-import Social_Nine from "@/../public/lp/TestimonialCard-9.webp";
 
 // Import Swiper styles
 import "swiper/css";
@@ -85,12 +84,12 @@ const LPSocial: React.FC<SocialGallerySectionProps> = ({
       username: "@chillmode",
     },
 
-    {
-      id: 9,
-      src: Social_Nine.src,
-      alt: "Relaxing with drink",
-      username: "@chillmode",
-    },
+    // {
+    //   id: 9,
+    //   src: Social_Nine.src,
+    //   alt: "Relaxing with drink",
+    //   username: "@chillmode",
+    // },
   ],
 }) => {
   return (

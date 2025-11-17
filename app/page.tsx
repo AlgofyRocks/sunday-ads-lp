@@ -11,7 +11,6 @@ import ImageWithText2 from "@/../public/lp/image_with_text_2.webp";
 import FadeInSection from "components/fade-in-section";
 import AgeGate from "components/lp-agegate";
 import FAQSection from "components/lp-faq";
-import LPFeed from "components/lp-feed";
 import LPFooter from "components/lp-footer";
 import LPNewsletter from "components/lp-newsletter";
 import ProductDetailPage from "components/lp-product-detail";
@@ -73,7 +72,7 @@ export default function HomePage() {
         klaviyoPublicKey="VFXVmg"
         useServerSide={false}
       />
-      <LPFeed />
+      {/* <LPFeed /> */}
       <LPFooter />
     </>
   );

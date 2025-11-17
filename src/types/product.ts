@@ -70,7 +70,7 @@ export interface ProductDetailPageProps {
   className?: string;
 }
 
-import VarietyImage1 from "@/../public/products/variety_1.webp";
+import VarietyImage1 from "@/../public/products/variety_1.png";
 import VarietyImage2 from "@/../public/products/variety_2.webp";
 import VarietyImage3 from "@/../public/products/variety_3.webp";
 
@@ -78,15 +78,15 @@ import ProductPeach1 from "@/../public/products/peach_1.webp";
 import ProductPeach2 from "@/../public/products/peach_2.webp";
 import ProductPeach3 from "@/../public/products/peach_3.webp";
 
-import ProductHibiscus1 from "@/../public/products/hibiscus_1.webp";
+import ProductHibiscus1 from "@/../public/products/hibiscus_1.png";
 import ProductHibiscus2 from "@/../public/products/hibiscus_2.webp";
 import ProductHibiscus3 from "@/../public/products/hibiscus_3.webp";
 
-import ProductClassic1 from "@/../public/products/classic_1.webp";
+import ProductClassic1 from "@/../public/products/classic_1.png";
 import ProductClassic2 from "@/../public/products/classic_2.webp";
 import ProductClassic3 from "@/../public/products/classic_3.webp";
 
-import ProductHalfHalf1 from "@/../public/products/halfhalf_1.webp";
+import ProductHalfHalf1 from "@/../public/products/halfhalf_1.png";
 import ProductHalfHalf2 from "@/../public/products/halfhalf_2.webp";
 import ProductHalfHalf3 from "@/../public/products/halfhalf_3.webp";
 
