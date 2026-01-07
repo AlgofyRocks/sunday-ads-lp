@@ -287,16 +287,16 @@ const LPNewsletter: React.FC<NewsletterSubscriptionProps> = ({
 
     try {
       // Sanitize inputs
-      const sanitizedData = {
-        email: sanitizeInput(email).toLowerCase(),
-        firstName: firstName ? sanitizeInput(firstName) : "",
-        emailConsent,
-        source: "website_newsletter",
-        formType: "landing_page",
-        timestamp: new Date().toISOString(),
-        userAgent:
-          typeof window !== "undefined" ? window.navigator.userAgent : "",
-      };
+const sanitizedData = {
+  email: sanitizeInput(email).toLowerCase(),
+  firstName: firstName ? sanitizeInput(firstName) : "",
+  emailConsent,
+  source: "website_newsletter",
+  formType: "landing_page",
+  timestamp: typeof window !== "undefined" ? new Date().toISOString() : "", // ✅ Safe
+  userAgent:
+    typeof window !== "undefined" ? window.navigator.userAgent : "",
+};
 
       if (onSubscribe) {
         // Use custom onSubscribe function if provided
