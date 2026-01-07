@@ -3,6 +3,8 @@ import { baseUrl } from "lib/utils";
 import { ReactNode } from "react";
 import Script from "next/script";
 import "./globals.css";
+import { Inter } from 'next/font/google'; // (Your imports might look slightly different)
+export const dynamic = 'force-dynamic'; 
 
 const { SITE_NAME } = process.env;
 import localFont from "next/font/local";
