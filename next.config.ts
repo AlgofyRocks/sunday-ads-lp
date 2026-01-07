@@ -25,12 +25,3 @@ const nextConfig: NextConfig = {
 };
 
 export default nextConfig;
-```
-
----
-
-## 🔴 But you still MUST fix the `/main` page issue!
-
-Since the config option doesn't work, you need to actually fix the code. The error is clear:
-```
-Error: Route "/main" used `new Date()` inside a Client Component
