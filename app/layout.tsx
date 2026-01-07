@@ -35,8 +35,22 @@ const acuminFont = localFont({
 export const metadata = {
   metadataBase: new URL(baseUrl),
   title: {
-    default: SITE_NAME!,
-    template: `%s | ${SITE_NAME}`,
+    default: 'SunDay™ "High" Iced Tea - Buzz, Not B00ze',
+    template: `%s | Sunday`,
+  },
+  description: 'Microdosed iced teas for a mellow buzz without b00ze. All-natural, delicious flavors. Take it easy like a Sunday morning.', 
+    openGraph: {
+    type: 'website',
+    title: 'SunDay™ "High" Iced Tea - Buzz, Not B00ze',
+    description: 'Microdosed iced teas for a mellow buzz without b00ze. All-natural, delicious flavors. Take it easy like a Sunday morning.',
+    images: [
+      {
+        url: '/lp/image_with_text_2.webp', // Make sure you have an image with this name in your 'public' folder
+        width: 1200,
+        height: 630,
+        alt: 'Sunday Iced Tea',
+      },
+    ],
   },
   robots: {
     follow: true,
