@@ -35,14 +35,14 @@ const acuminFont = localFont({
 export const metadata = {
   metadataBase: new URL(baseUrl),
   title: {
-    default: 'SunDay™ "High" Iced Tea - Buzz, Not B00ze',
+    default: 'SunDay™ Iced Tea for "High" Vibes - All Buzz, No B00ze',
     template: `%s | Sunday`,
   },
-  description: 'Microdosed iced teas for a mellow buzz without b00ze. All-natural, delicious flavors. Take it easy like a Sunday morning.', 
+  description: 'Experience SunDay™ iced teas for a mellow buzz without b00ze. All-natural, delicious flavors. Take it easy like a Sunday morning.', 
     openGraph: {
     type: 'website',
-    title: 'SunDay™ "High" Iced Tea - Buzz, Not B00ze',
-    description: 'Microdosed iced teas for a mellow buzz without b00ze. All-natural, delicious flavors. Take it easy like a Sunday morning.',
+    title: 'SunDay™ Iced Tea for "High" Vibes - All Buzz, No B00ze',
+    description: 'Experience SunDay™ iced teas for a mellow buzz without b00ze. All-natural, delicious flavors. Take it easy like a Sunday morning.',
     images: [
       {
         url: '/lp/image_with_text_2.webp', // Make sure you have an image with this name in your 'public' folder
