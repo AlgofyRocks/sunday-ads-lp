@@ -1,6 +1,6 @@
-export default {
+const nextConfig = {
+  cacheComponents: true, 
   experimental: {
-    ppr: true,
     inlineCss: true,
     useCache: true
   },
