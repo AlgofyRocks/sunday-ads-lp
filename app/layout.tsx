@@ -35,27 +35,33 @@ const acuminFont = localFont({
 });
 
 export const metadata: Metadata = {
-  title: {
-    default: 'SunDay™ "High" Iced Tea - Buzz, Not B00zee',
-    template: `%s | Sunday`,
-  },
-  description: 'Microdosed iced teas for a mellow buzzz without b00ze. All-natural, delicious flavors. Take it easy like a Sunday morning.', 
-    openGraph: {
-    type: 'website',
-    title: 'SunDay™ "High" Iced Tea - Buzz, Not B00ze',
-    description: 'Microdosed iced teas for a mellow buzz without b00ze. All-natural, delicious flavors. Take it easy like a Sunday morning.',
+  title: 'SunDay™ "High" Iced Tea - Buzz, Not B00zee',
+  description:
+    "Microdosed iced teas for a mellow buzzz without b00ze. All-natural, delicious flavors. Take it easy like a Sunday morning.",
+
+  openGraph: {
+    type: "website",
+    url: "https://shop.drinkasunday.com/",
+    title: 'SunDay™ "High" Iced Tea - Buzz, Not B00zee',
+    description:
+      "Microdosed iced teas for a mellow buzzz without b00ze. All-natural, delicious flavors. Take it easy like a Sunday morning.",
     images: [
       {
-        url: '/sunday-share.webp', // Make sure you have an image with this name in your 'public' folder
+        url: "/sunday-share.webp",
         width: 1200,
         height: 630,
-        alt: 'Sunday Iced Tea',
+        alt: 'SunDay™ High Iced Tea',
       },
     ],
   },
-  robots: {
-    follow: true,
-    index: true,
+
+  twitter: {
+    card: "summary_large_image",
+    url: "https://shop.drinkasunday.com/",
+    title: 'SunDay™ "High" Iced Tea - Buzz, Not B00zee',
+    description:
+      "Microdosed iced teas for a mellow buzzz without b00ze. All-natural, delicious flavors. Take it easy like a Sunday morning.",
+    images: ["https://metatags.io/images/meta-tags.png"],
   },
 };
 
