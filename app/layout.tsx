@@ -49,7 +49,7 @@ export const metadata: Metadata = {
       "Microdosed iced teas for a mellow buzzz without b00ze. All-natural, delicious flavors. Take it easy like a Sunday morning.",
     images: [
       {
-        url: "/sunday-share.webp",
+        url: "/sunday-share.png",
         width: 1200,
         height: 630,
         alt: 'SunDay™ High Iced Tea',
@@ -63,7 +63,8 @@ export const metadata: Metadata = {
     title: 'SunDay™ "High" Iced Tea - Buzz, Not B00zee',
     description:
       "Microdosed iced teas for a mellow buzzz without b00ze. All-natural, delicious flavors. Take it easy like a Sunday morning.",
-    images: ["https://metatags.io/images/meta-tags.png"],
+    images: [{        url: "/sunday-share.png",}
+],
   },
 };
 
