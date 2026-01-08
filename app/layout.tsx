@@ -35,6 +35,8 @@ const acuminFont = localFont({
 });
 
 export const metadata: Metadata = {
+    metadataBase: new URL("https://shop.drinkasunday.com"),
+
   title: 'SunDay™ "High" Iced Tea - Buzz, Not B00zee',
   description:
     "Microdosed iced teas for a mellow buzzz without b00ze. All-natural, delicious flavors. Take it easy like a Sunday morning.",
