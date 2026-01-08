@@ -3,6 +3,8 @@ import { baseUrl } from "lib/utils";
 import { ReactNode } from "react";
 import Script from "next/script";
 import "./globals.css";
+import type { Metadata } from 'next';
+
 
 const { SITE_NAME } = process.env;
 import localFont from "next/font/local";
@@ -32,8 +34,7 @@ const acuminFont = localFont({
   variable: "--font-acumin",
 });
 
-export const metadata = {
-  metadataBase: new URL(baseUrl),
+export const metadata: Metadata = {
   title: {
     default: 'SunDay™ "High" Iced Tea - Buzz, Not B00zee',
     template: `%s | Sunday`,
