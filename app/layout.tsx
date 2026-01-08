@@ -35,14 +35,14 @@ const acuminFont = localFont({
 export const metadata = {
   metadataBase: new URL(baseUrl),
   title: {
-    default: 'SunDay™ Iced Tea for "High" Vibes - All Buzz, No B00ze',
+    default: 'SunDay™ "High" Iced Tea - Buzz, Not B00ze',
     template: `%s | Sunday`,
   },
-  description: 'Experience SunDay™ iced teas for a mellow buzz without b00ze. All-natural, delicious flavors. Take it easy like a Sunday morning.', 
+  description: 'Microdosed iced teas for a mellow buzz without b00ze. All-natural, delicious flavors. Take it easy like a Sunday morning.', 
     openGraph: {
     type: 'website',
-    title: 'SunDay™ Iced Tea for "High" Vibes - All Buzz, No B00ze',
-    description: 'Experience SunDay™ iced teas for a mellow buzz without b00ze. All-natural, delicious flavors. Take it easy like a Sunday morning.',
+    title: 'SunDay™ "High" Iced Tea - Buzz, Not B00ze',
+    description: 'Microdosed iced teas for a mellow buzz without b00ze. All-natural, delicious flavors. Take it easy like a Sunday morning.',
     images: [
       {
         url: '/lp/image_with_text_2.webp', // Make sure you have an image with this name in your 'public' folder
@@ -67,7 +67,7 @@ export default async function RootLayout({
     <html lang="en" className={GeistSans.variable}>
       <head>
         {/* GTM Script no head com strategy="beforeInteractive" */}
-       <Script id="google-tag-manager" strategy="afterInteractive">
+        <Script id="google-tag-manager" strategy="afterInteractive">
           {`
             (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
             new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
