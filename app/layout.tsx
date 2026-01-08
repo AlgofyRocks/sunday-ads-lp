@@ -38,7 +38,7 @@ export const metadata = {
     default: 'SunDay™ "High" Iced Tea - Buzz, Not B00ze',
     template: `%s | Sunday`,
   },
-  description: 'Microdosed iced teas for a mellow buzz without b00ze. All-natural, delicious flavors. Take it easy like a Sunday morning.', 
+  description: 'Microdosed iced teas for a mellow buzzz without b00ze. All-natural, delicious flavors. Take it easy like a Sunday morning.', 
     openGraph: {
     type: 'website',
     title: 'SunDay™ "High" Iced Tea - Buzz, Not B00ze',
