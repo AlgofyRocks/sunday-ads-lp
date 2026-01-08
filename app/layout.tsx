@@ -45,7 +45,7 @@ export const metadata = {
     description: 'Microdosed iced teas for a mellow buzz without b00ze. All-natural, delicious flavors. Take it easy like a Sunday morning.',
     images: [
       {
-        url: '/Sunday_social%20sharing.webp', // Make sure you have an image with this name in your 'public' folder
+        url: '/sunday-share.webp', // Make sure you have an image with this name in your 'public' folder
         width: 1200,
         height: 630,
         alt: 'Sunday Iced Tea',
