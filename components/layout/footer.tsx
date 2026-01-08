@@ -6,7 +6,7 @@ import { getMenu } from 'lib/shopify';
 import { Suspense } from 'react';
 
 const { COMPANY_NAME, SITE_NAME } = process.env;
-
+export const dynamic = 'force-dynamic';
 export default async function Footer() {
   const currentYear = new Date().getFullYear();
   const copyrightDate = 2023 + (currentYear > 2023 ? `-${currentYear}` : '');
