@@ -67,7 +67,7 @@ export default async function RootLayout({
     <html lang="en" className={GeistSans.variable}>
       <head>
         {/* GTM Script no head com strategy="beforeInteractive" */}
-        <Script id="google-tag-manager" strategy="beforeInteractive">
+       <Script id="google-tag-manager" strategy="afterInteractive">
           {`
             (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
             new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
