@@ -35,7 +35,7 @@ const acuminFont = localFont({
 export const metadata = {
   metadataBase: new URL(baseUrl),
   title: {
-    default: 'SunDay™ "High" Iced Tea - Buzz, Not B00ze',
+    default: 'SunDay™ "High" Iced Tea - Buzz, Not B00zee',
     template: `%s | Sunday`,
   },
   description: 'Microdosed iced teas for a mellow buzzz without b00ze. All-natural, delicious flavors. Take it easy like a Sunday morning.', 
