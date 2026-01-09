@@ -88,7 +88,7 @@ const BogoOffer: React.FC<BogoBannerProps> = ({
         {/* Product Image */}
         <div className="flex-shrink-0 relative">
           <div className="bg-white/50 rounded p-1 border border-white/30">
-            <div className="relative w-10 h-10">
+            <div className="relative w-20 h-20">
               <img
                 src={selectedProduct.images[0]?.src}
                 alt={selectedProduct.images[0]?.alt || selectedProduct.name}
