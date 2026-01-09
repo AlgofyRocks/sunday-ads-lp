@@ -27,10 +27,9 @@ export interface NutritionFacts {
 export interface ProductVariant {
   variantId: string;
   packSizeId: string;
-  price: string; // Specific price for this variant
-  compareAtPrice?: string; // Optional "was" price for showing discounts
+  price: string;
+  compareAtPrice?: string;
 }
-
 
 export interface Product {
   id: string;
@@ -38,12 +37,12 @@ export interface Product {
   name: string;
   slug: string;
   description: string;
-  basePrice: string; // Price per unit for 8-pack one-time
+  basePrice: string;
   images: ProductImage[];
   ingredients: string;
   nutritionFacts: NutritionFacts;
   benefits: string[];
-  variants: ProductVariant[]; // Variants for different pack sizes
+  variants: ProductVariant[];
 }
 
 export interface PackSizeOption {
@@ -70,59 +69,57 @@ export interface ProductDetailPageProps {
   className?: string;
 }
 
-import VarietyImage1 from "@/../public/products/variety_1.png";
-import VarietyImage2 from "@/../public/products/variety_2.webp";
-import VarietyImage3 from "@/../public/products/variety_3.webp";
+import VarietyImage1 from "../../public/products/variety_1.png";
+import VarietyImage2 from "../../public/products/variety_2.webp";
+import VarietyImage3 from "../../public/products/variety_3.webp";
 
-import ProductPeach1 from "@/../public/products/peach_1.png";
-import ProductPeach2 from "@/../public/products/peach_2.webp";
-import ProductPeach3 from "@/../public/products/peach_3.webp";
+import ProductPeach1 from "../../public/products/peach_1.png";
+import ProductPeach2 from "../../public/products/peach_2.webp";
+import ProductPeach3 from "../../public/products/peach_3.webp";
 
-import ProductHibiscus1 from "@/../public/products/hibiscus_1.png";
-import ProductHibiscus2 from "@/../public/products/hibiscus_2.webp";
-import ProductHibiscus3 from "@/../public/products/hibiscus_3.webp";
+import ProductHibiscus1 from "../../public/products/hibiscus_1.png";
+import ProductHibiscus2 from "../../public/products/hibiscus_2.webp";
+import ProductHibiscus3 from "../../public/products/hibiscus_3.webp";
 
-import ProductClassic1 from "@/../public/products/classic_1.png";
-import ProductClassic2 from "@/../public/products/classic_2.webp";
-import ProductClassic3 from "@/../public/products/classic_3.webp";
+import ProductClassic1 from "../../public/products/classic_1.png";
+import ProductClassic2 from "../../public/products/classic_2.webp";
+import ProductClassic3 from "../../public/products/classic_3.webp";
 
-import ProductHalfHalf1 from "@/../public/products/halfhalf_1.png";
-import ProductHalfHalf2 from "@/../public/products/halfhalf_2.webp";
-import ProductHalfHalf3 from "@/../public/products/halfhalf_3.webp";
+import ProductHalfHalf1 from "../../public/products/halfhalf_1.png";
+import ProductHalfHalf2 from "../../public/products/halfhalf_2.webp";
+import ProductHalfHalf3 from "../../public/products/halfhalf_3.webp";
 
 // ============================================
 // BOGO FREE VARIANTS MAPPING
 // ============================================
-// Maps regular product variants to their free (100% off) counterparts
 const BOGO_FREE_VARIANTS: Record<string, Record<string, string>> = {
   "variety-pack": {
-    "8-pack": "42006427598933",   // Free Variety Pack 8-pack
-    "12-pack": "42006427631701",  // Free Variety Pack 12-pack
-    "16-pack": "42006427664469",  // Free Variety Pack 16-pack
+    "8-pack": "42006427598933",
+    "12-pack": "42006427631701",
+    "16-pack": "42006427664469",
   },
   "classic": {
-    "8-pack": "42006427041877",   // Free Classic 8-pack
-    "12-pack": "42006427074645",  // Free Classic 12-pack
-    "16-pack": "42006427107413",  // Free Classic 16-pack
+    "8-pack": "42006427041877",
+    "12-pack": "42006427074645",
+    "16-pack": "42006427107413",
   },
   "half-half": {
-    "8-pack": "42006427172949",   // Free Half & Half 8-pack
-    "12-pack": "42006427205717",  // Free Half & Half 12-pack
-    "16-pack": "42006427238485",  // Free Half & Half 16-pack
+    "8-pack": "42006427172949",
+    "12-pack": "42006427205717",
+    "16-pack": "42006427238485",
   },
   "peach": {
-    "8-pack": "42006427435093",   // Free Peach 8-pack
-    "12-pack": "42006427467861",  // Free Peach 12-pack
-    "16-pack": "42006427500629",  // Free Peach 16-pack
+    "8-pack": "42006427435093",
+    "12-pack": "42006427467861",
+    "16-pack": "42006427500629",
   },
   "hibiscus": {
-    "8-pack": "42006427304021",   // Free Hibiscus 8-pack
-    "12-pack": "42006427336789",  // Free Hibiscus 12-pack
-    "16-pack": "42006427369557",  // Free Hibiscus 16-pack
+    "8-pack": "42006427304021",
+    "12-pack": "42006427336789",
+    "16-pack": "42006427369557",
   },
 };
 
-// Utility function to get the free variant ID for BOGO
 export const getFreeVariantId = (productId: string, packSize: string): string | null => {
   return BOGO_FREE_VARIANTS[productId]?.[packSize] || null;
 };
@@ -501,23 +498,19 @@ export const purchaseOptions: PurchaseOption[] = [
   },
 ];
 
-// Configuration constants
 const SHOPIFY_BASE_URL = "https://drinkasunday.com";
 const SUBSCRIPTION_SELLING_PLAN_ID = "7034929237";
 
-// Utility function to get variant by product and pack size
 export const getVariant = (productId: string, packSize: string): ProductVariant | null => {
   const product = products.find(p => p.id === productId);
   return product?.variants.find(v => v.packSizeId === packSize) || null;
 };
 
-// Utility function to get variant ID
 export const getVariantId = (productId: string, packSize: string): string | null => {
   const variant = getVariant(productId, packSize);
   return variant?.variantId || null;
 };
 
-// Utility function to get variant price
 export const getVariantPrice = (productId: string, packSize: string): { price: string; compareAtPrice?: string } | null => {
   const variant = getVariant(productId, packSize);
   if (!variant) return null;
@@ -528,10 +521,6 @@ export const getVariantPrice = (productId: string, packSize: string): { price: s
   };
 };
 
-// ============================================
-// UPDATED CHECKOUT URL WITH BOGO
-// ============================================
-// Utility function to generate Shopify checkout URL with BOGO (Buy One Get One Free)
 export const getCheckoutUrl = (
   productId: string,
   packSize: string,
@@ -543,54 +532,34 @@ export const getCheckoutUrl = (
 
   if (!variantId) {
     console.warn(`No variant ID found for ${productId} - ${packSize}`);
-    return '/checkout'; // fallback URL
+    return '/checkout';
   }
 
-  // Build the cart/add URL parameters
   const cartParams = new URLSearchParams();
   
-  // Add the regular (paid) product
   cartParams.append('items[0][id]', variantId);
   cartParams.append('items[0][quantity]', quantity.toString());
 
-  // Add selling plan for subscriptions on the paid product
   if (purchaseType === "subscription") {
     cartParams.append('items[0][selling_plan]', SUBSCRIPTION_SELLING_PLAN_ID);
   }
 
-  // Add the free product (BOGO) - ONLY for one-time purchases
-  // Always add exactly 1 free item, regardless of paid quantity
-  if (purchaseType === "onetime" && freeVariantId) {
-    cartParams.append('items[1][id]', freeVariantId);
-    cartParams.append('items[1][quantity]', '1'); // Always just 1 free item
-  } else if (purchaseType === "onetime" && !freeVariantId) {
-  // Add the free product (BOGO) - for BOTH one-time and subscription
-  // Always add exactly 1 free item, regardless of paid quantity
   if (freeVariantId) {
     cartParams.append('items[1][id]', freeVariantId);
-    cartParams.append('items[1][quantity]', '1'); // Always just 1 free item
-    
-    // Note: Free products don't get selling plans since they're already $0
+    cartParams.append('items[1][quantity]', '1');
   } else {
     console.warn(`No free variant ID found for ${productId} - ${packSize}. BOGO will not be applied.`);
   }
 
-  // Add the final redirect to checkout (this gets double-encoded)
   cartParams.append('return_to', '/checkout?');
 
-  // Build the cart/add URL
   const cartAddUrl = `/cart/add?${cartParams.toString()}`;
-
-  // URL encode the cart/add URL for the return_to parameter
   const encodedCartAddUrl = encodeURIComponent(cartAddUrl);
-
-  // Build the final cart/clear URL
   const finalUrl = `${SHOPIFY_BASE_URL}/cart/clear?return_to=${encodedCartAddUrl}`;
 
   return finalUrl;
 };
 
-// Helper function for testing/debugging - shows the decoded cart/add URL
 export const getDecodedCartAddUrl = (
   productId: string,
   packSize: string,
@@ -604,7 +573,6 @@ export const getDecodedCartAddUrl = (
 
   const cartParams = new URLSearchParams();
   
-  // Add regular product
   cartParams.append('items[0][id]', variantId);
   cartParams.append('items[0][quantity]', quantity.toString());
 
@@ -612,14 +580,9 @@ export const getDecodedCartAddUrl = (
     cartParams.append('items[0][selling_plan]', SUBSCRIPTION_SELLING_PLAN_ID);
   }
 
-  // Add free product - only for one-time purchases
-  // Always just 1 free item
-  if (purchaseType === "onetime" && freeVariantId) {
-  // Add free product - for both one-time and subscription
-  // Always just 1 free item
   if (freeVariantId) {
     cartParams.append('items[1][id]', freeVariantId);
-    cartParams.append('items[1][quantity]', '1'); // Always 1 free
+    cartParams.append('items[1][quantity]', '1');
   }
 
   cartParams.append('return_to', '/checkout?');
@@ -627,7 +590,6 @@ export const getDecodedCartAddUrl = (
   return `/cart/add?${cartParams.toString()}`;
 };
 
-// Helper to get all available pack sizes for a product
 export const getAvailablePackSizes = (productId: string): PackSizeOption[] => {
   const product = products.find(p => p.id === productId);
   if (!product) return [];
