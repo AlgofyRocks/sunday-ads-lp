@@ -111,7 +111,7 @@ const BogoOffer: React.FC<BogoBannerProps> = ({
             <div className="min-w-0">
               <div className="flex items-center gap-1.5 mb-0.5">
                 <div className="bg-foreground text-white text-[10px] px-1.5 py-0.5 rounded font-bold whitespace-nowrap">
-                  BOGO (Buy 1 get 1 the same)
+                  BOGO (Buy one get one free at checkout)
                 </div>
               </div>
             </div>
