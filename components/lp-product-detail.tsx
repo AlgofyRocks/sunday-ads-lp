@@ -2,7 +2,6 @@
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
-import BogoOffer from "@/components/buy-one-get-one/BogoBanner";
 import {
   AccordionItem,
   getAvailablePackSizes,
