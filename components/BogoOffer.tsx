@@ -118,6 +118,7 @@ const BogoOffer: React.FC<BogoBannerProps> = ({
 
             {/* All time units in one row */}
             <div className="flex-shrink-0">
+              <p>Expiring in</p>
               <div className="flex items-center gap-1">
                 {/* Days if exists */}
                 {timeLeft.days > 0 && (
