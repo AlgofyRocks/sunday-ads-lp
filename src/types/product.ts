@@ -563,11 +563,10 @@ export const getCheckoutUrl = (
     cartParams.append('items[1][id]', freeVariantId);
     cartParams.append('items[1][quantity]', quantity.toString()); // Same quantity as paid product
     
-    // Note: Free products typically don't need a selling plan since they're $0
-    // But if you want subscriptions to also apply to the free item, uncomment below:
-    // if (purchaseType === "subscription") {
-    //   cartParams.append('items[1][selling_plan]', SUBSCRIPTION_SELLING_PLAN_ID);
-    // }
+    // Add selling plan for subscriptions on the free product too
+    if (purchaseType === "subscription") {
+      cartParams.append('items[1][selling_plan]', SUBSCRIPTION_SELLING_PLAN_ID);
+    }
   } else {
     console.warn(`No free variant ID found for ${productId} - ${packSize}. BOGO will not be applied.`);
   }
@@ -613,6 +612,11 @@ export const getDecodedCartAddUrl = (
   if (freeVariantId) {
     cartParams.append('items[1][id]', freeVariantId);
     cartParams.append('items[1][quantity]', quantity.toString());
+    
+    // Add selling plan for subscriptions
+    if (purchaseType === "subscription") {
+      cartParams.append('items[1][selling_plan]', SUBSCRIPTION_SELLING_PLAN_ID);
+    }
   }
 
   cartParams.append('return_to', '/checkout?');
