@@ -82,7 +82,7 @@ const BogoOffer: React.FC<BogoBannerProps> = ({
         scale: isExpired ? 0.95 : 1
       }}
       transition={{ duration: 0.2 }}
-      className={` rounded-md border border-foreground/20 shadow-sm overflow-hidden ${className}`}
+      className={`w-fit rounded-md border border-foreground/20 shadow-sm overflow-hidden ${className}`}
     >
       <div className="flex items-center gap-2 p-2">
         {/* Product Image */}
@@ -117,8 +117,8 @@ const BogoOffer: React.FC<BogoBannerProps> = ({
             </div>
 
             {/* All time units in one row */}
-            <div className="flex-shrink-0">
-              <p>Expiring in</p>
+            <div className="flex gap-2.5 flex-shrink-0">
+        <p className="text-xs text-foreground/80 truncate">
               <div className="flex items-center gap-1">
                 {/* Days if exists */}
                 {timeLeft.days > 0 && (
