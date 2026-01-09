@@ -82,7 +82,7 @@ const BogoOffer: React.FC<BogoBannerProps> = ({
         scale: isExpired ? 0.95 : 1
       }}
       transition={{ duration: 0.2 }}
-      className={`bg-gradient-to-r from-[#FFE25D] to-[#FFF6D1] rounded-md border border-foreground/20 shadow-sm overflow-hidden ${className}`}
+      className={` rounded-md border border-foreground/20 shadow-sm overflow-hidden ${className}`}
     >
       <div className="flex items-center gap-2 p-2">
         {/* Product Image */}
@@ -106,7 +106,7 @@ const BogoOffer: React.FC<BogoBannerProps> = ({
         {/* Content Area */}
         <div className="flex-1 min-w-0">
           {/* Text and Countdown in one row */}
-          <div  className="flex items-center justify-between gap-2">
+          <div  className="flex flex-wrap items-center justify-between gap-2">
             {/* Text */}
             <div className="min-w-0">
               <div className="flex items-center gap-1.5 mb-0.5">
