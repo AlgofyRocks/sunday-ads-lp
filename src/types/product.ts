@@ -564,6 +564,14 @@ export const getCheckoutUrl = (
     cartParams.append('items[1][id]', freeVariantId);
     cartParams.append('items[1][quantity]', '1'); // Always just 1 free item
   } else if (purchaseType === "onetime" && !freeVariantId) {
+  // Add the free product (BOGO) - for BOTH one-time and subscription
+  // Always add exactly 1 free item, regardless of paid quantity
+  if (freeVariantId) {
+    cartParams.append('items[1][id]', freeVariantId);
+    cartParams.append('items[1][quantity]', '1'); // Always just 1 free item
+    
+    // Note: Free products don't get selling plans since they're already $0
+  } else {
     console.warn(`No free variant ID found for ${productId} - ${packSize}. BOGO will not be applied.`);
   }
 
@@ -607,6 +615,9 @@ export const getDecodedCartAddUrl = (
   // Add free product - only for one-time purchases
   // Always just 1 free item
   if (purchaseType === "onetime" && freeVariantId) {
+  // Add free product - for both one-time and subscription
+  // Always just 1 free item
+  if (freeVariantId) {
     cartParams.append('items[1][id]', freeVariantId);
     cartParams.append('items[1][quantity]', '1'); // Always 1 free
   }
