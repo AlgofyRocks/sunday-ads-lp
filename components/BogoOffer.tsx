@@ -1,4 +1,4 @@
-// BOGO Component - Compact Version
+// BOGO Component - Ultra Compact Version
 "use client";
 import { Product } from "@/types/product";
 import { motion } from "motion/react";
@@ -21,29 +21,22 @@ const BogoOffer: React.FC<BogoBannerProps> = ({
   className = "",
 }) => {
   const [timeLeft, setTimeLeft] = useState<TimeLeft>({
-    days: 22,
-    hours: 21,
-    minutes: 49,
+    days: 0,
+    hours: 0,
+    minutes: 0,
     seconds: 0,
   });
 
   const [isExpired, setIsExpired] = useState(false);
   const [isVisible, setIsVisible] = useState(true);
 
-  // Fixed countdown calculation
-  useEffect(() => {
-    // Function to parse the target date correctly
-    const parseTargetDate = () => {
-      // February 1, 2026 at 4:00 PM EST
-      // EST is UTC-5, but we need to create it in UTC first
-      const targetUTC = new Date("2026-02-01T21:00:00Z"); // 4PM EST = 9PM UTC
-      return targetUTC;
-    };
+  const targetDate = new Date("2026-02-01T16:00:00-05:00");
 
+  useEffect(() => {
     const calculateTimeLeft = () => {
-      const now = new Date();
-      const target = parseTargetDate();
-      const difference = target.getTime() - now.getTime();
+      const now = new Date().getTime();
+      const target = targetDate.getTime();
+      const difference = target - now;
 
       if (difference <= 0) {
         setIsExpired(true);
@@ -58,10 +51,6 @@ const BogoOffer: React.FC<BogoBannerProps> = ({
       const minutes = Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60));
       const seconds = Math.floor((difference % (1000 * 60)) / 1000);
 
-      // If you want to force specific values for testing, use these:
-      // setTimeLeft({ days: 22, hours: 21, minutes: 49, seconds: 0 });
-      
-      // Otherwise use calculated values:
       setTimeLeft({ days, hours, minutes, seconds });
     };
 
@@ -114,61 +103,83 @@ const BogoOffer: React.FC<BogoBannerProps> = ({
 
         {/* Content Area */}
         <div className="flex-1 min-w-0">
-          <div className="flex items-center gap-1.5 mb-1">
-            <h3 className="text-sm font-bold text-foreground truncate">
-              BOGO (Buy 1 get 1 the same)
-            </h3>
-            <span className="text-xs bg-foreground text-white px-1.5 py-0.5 rounded-full font-medium">
-              Limited
-            </span>
-          </div>
-          
-          <p className="text-xs text-foreground/80 mb-2 line-clamp-2">
-            Free {selectedProduct.name} with purchase
-          </p>
+          {/* Text and Countdown in one row */}
+          <div className="flex items-center justify-between gap-2">
+            {/* Text */}
+            <div className="min-w-0">
+              <div className="flex items-center gap-1.5 mb-0.5">
+                <div className="bg-foreground text-white text-[10px] px-1.5 py-0.5 rounded font-bold whitespace-nowrap">
+                  BUY 1 GET 1 FREE
+                </div>
+              </div>
+              <p className="text-xs text-foreground/80 truncate">
+                Free {selectedProduct.name} with purchase
+              </p>
+            </div>
 
-          {/* Compact Countdown */}
-          <div className="flex items-center gap-1.5">
-            <span className="text-xs font-medium text-foreground/70 whitespace-nowrap">
-              Ends in:
-            </span>
-            <div className="flex items-center gap-1">
-              {/* Show all time units together */}
-              {timeLeft.days > 0 && (
-                <>
-                  <CompactTimeBox value={formatNumber(timeLeft.days)} label="D" />
-                  <span className="text-sm font-bold text-foreground/40">:</span>
-                </>
-              )}
-              <CompactTimeBox value={formatNumber(timeLeft.hours)} label="H" />
-              <span className="text-sm font-bold text-foreground/40">:</span>
-              <CompactTimeBox value={formatNumber(timeLeft.minutes)} label="M" />
-              <span className="text-sm font-bold text-foreground/40">:</span>
-              <CompactTimeBox value={formatNumber(timeLeft.seconds)} label="S" />
+            {/* All time units in one row */}
+            <div className="flex-shrink-0">
+              <div className="flex items-center gap-1">
+                {/* Days if exists */}
+                {timeLeft.days > 0 && (
+                  <>
+                    <div className="flex flex-col items-center">
+                      <div className="bg-white rounded px-1 py-0.5 min-w-[24px] border border-foreground/20">
+                        <span className="text-sm font-bold text-foreground font-mono tabular-nums">
+                          {timeLeft.days}
+                        </span>
+                      </div>
+                      <span className="text-[9px] text-foreground/60 font-medium">
+                        D
+                      </span>
+                    </div>
+                    <span className="text-xs font-bold text-foreground/40 pb-1">:</span>
+                  </>
+                )}
+                
+                {/* Hours */}
+                <div className="flex flex-col items-center">
+                  <div className="bg-white rounded px-1 py-0.5 min-w-[24px] border border-foreground/20">
+                    <span className="text-sm font-bold text-foreground font-mono tabular-nums">
+                      {formatNumber(timeLeft.hours)}
+                    </span>
+                  </div>
+                  <span className="text-[9px] text-foreground/60 font-medium">
+                    H
+                  </span>
+                </div>
+                <span className="text-xs font-bold text-foreground/40 pb-1">:</span>
+                
+                {/* Minutes */}
+                <div className="flex flex-col items-center">
+                  <div className="bg-white rounded px-1 py-0.5 min-w-[24px] border border-foreground/20">
+                    <span className="text-sm font-bold text-foreground font-mono tabular-nums">
+                      {formatNumber(timeLeft.minutes)}
+                    </span>
+                  </div>
+                  <span className="text-[9px] text-foreground/60 font-medium">
+                    M
+                  </span>
+                </div>
+                <span className="text-xs font-bold text-foreground/40 pb-1">:</span>
+                
+                {/* Seconds */}
+                <div className="flex flex-col items-center">
+                  <div className="bg-white rounded px-1 py-0.5 min-w-[24px] border border-foreground/20">
+                    <span className="text-sm font-bold text-foreground font-mono tabular-nums">
+                      {formatNumber(timeLeft.seconds)}
+                    </span>
+                  </div>
+                  <span className="text-[9px] text-foreground/60 font-medium">
+                    S
+                  </span>
+                </div>
+              </div>
             </div>
           </div>
         </div>
       </div>
     </motion.div>
-  );
-};
-
-// Compact Time Box Component
-const CompactTimeBox: React.FC<{ value: string; label: string }> = ({
-  value,
-  label,
-}) => {
-  return (
-    <div className="flex flex-col items-center">
-      <div className="bg-white rounded px-1.5 py-1 min-w-[28px] border border-foreground/20">
-        <span className="text-sm font-bold text-foreground font-mono tabular-nums">
-          {value}
-        </span>
-      </div>
-      <span className="text-[10px] text-foreground/60 mt-0.5 font-medium">
-        {label}
-      </span>
-    </div>
   );
 };
 
