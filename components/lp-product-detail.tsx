@@ -12,22 +12,9 @@ import {
   products,
   purchaseOptions,
 } from "@/types/product";
-import { Check, Minus, Plus, ShieldCheck, Star, Truck, Gift } from "lucide-react";
+import { Check, Minus, Plus, ShieldCheck, Star, Truck } from "lucide-react";
 import { AnimatePresence, motion } from "motion/react";
 import React, { useCallback, useMemo, useRef, useState } from "react";
-
-// BOGO Offer Configuration
-interface BOGOOffer {
-  id: string;
-  title: string;
-  description: string;
-  active: boolean;
-  expiresAt?: Date;
-  conditions: {
-    minQuantity: number;
-    freeQuantity: number;
-  };
-}
 
 const ProductDetailPage: React.FC<ProductDetailPageProps> = ({
   className = " ",
@@ -47,55 +34,6 @@ const ProductDetailPage: React.FC<ProductDetailPageProps> = ({
   const touchStartX = useRef<number>(0);
   const touchEndX = useRef<number>(0);
   const isDragging = useRef<boolean>(false);
-
-  // BOGO Offer - You can make this dynamic from your backend
-  const bogoOffer: BOGOOffer = {
-    id: "bogo-2025",
-    title: "BOGO (Buy 1 get 1 the same)",
-    description: "Buy one, get one free on all products!",
-    active: true,
-    expiresAt: new Date("2025-02-01"), // Set your expiration date
-    conditions: {
-      minQuantity: 1,
-      freeQuantity: 1,
-    },
-  };
-
-  // Calculate time remaining for offer
-  const [timeRemaining, setTimeRemaining] = useState({
-    days: 0,
-    hours: 0,
-    minutes: 0,
-    seconds: 0,
-  });
-
-  // Countdown timer effect
-  React.useEffect(() => {
-    if (!bogoOffer.expiresAt) return;
-
-    const updateCountdown = () => {
-      const now = new Date().getTime();
-      const expiry = bogoOffer.expiresAt!.getTime();
-      const distance = expiry - now;
-
-      if (distance < 0) {
-        setTimeRemaining({ days: 0, hours: 0, minutes: 0, seconds: 0 });
-        return;
-      }
-
-      setTimeRemaining({
-        days: Math.floor(distance / (1000 * 60 * 60 * 24)),
-        hours: Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)),
-        minutes: Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60)),
-        seconds: Math.floor((distance % (1000 * 60)) / 1000),
-      });
-    };
-
-    updateCountdown();
-    const interval = setInterval(updateCountdown, 1000);
-
-    return () => clearInterval(interval);
-  }, [bogoOffer.expiresAt]);
 
   // Get current product
   const currentProduct = useMemo(() => {
@@ -139,26 +77,6 @@ const ProductDetailPage: React.FC<ProductDetailPageProps> = ({
         : null,
     };
   }, [selectedProductId, selectedPackSize, selectedPurchaseType, quantity]);
-
-  // Calculate BOGO details
-  const bogoDetails = useMemo(() => {
-    if (!bogoOffer.active || selectedPurchaseType === "subscription") {
-      return {
-        isEligible: false,
-        freeItems: 0,
-        totalItems: quantity,
-      };
-    }
-
-    const freeItems = Math.floor(quantity / bogoOffer.conditions.minQuantity) * bogoOffer.conditions.freeQuantity;
-    const totalItems = quantity + freeItems;
-
-    return {
-      isEligible: quantity >= bogoOffer.conditions.minQuantity,
-      freeItems,
-      totalItems,
-    };
-  }, [quantity, bogoOffer, selectedPurchaseType]);
 
   // Get available pack sizes for current product
   const availablePackSizes = useMemo(() => {
@@ -213,6 +131,7 @@ const ProductDetailPage: React.FC<ProductDetailPageProps> = ({
     const currentTouch = touch.clientX;
     const diff = touchStartX.current - currentTouch;
 
+    // If user has moved more than 10px, consider it a drag
     if (Math.abs(diff) > 10) {
       isDragging.current = true;
     }
@@ -241,6 +160,7 @@ const ProductDetailPage: React.FC<ProductDetailPageProps> = ({
       goToPrevImage();
     }
 
+    // Reset touch positions
     touchStartX.current = 0;
     touchEndX.current = 0;
     isDragging.current = false;
@@ -385,6 +305,7 @@ const ProductDetailPage: React.FC<ProductDetailPageProps> = ({
     setIsSpinning(true);
     e.preventDefault();
 
+    // Get the variant ID for the selected combination
     const variantId = getVariantId(selectedProductId, selectedPackSize);
 
     if (!variantId) {
@@ -393,20 +314,18 @@ const ProductDetailPage: React.FC<ProductDetailPageProps> = ({
         selectedProductId,
         selectedPackSize
       );
-      setIsSpinning(false);
       return;
     }
 
-    // If BOGO is active and eligible, adjust quantity in checkout
-    const checkoutQuantity = bogoDetails.isEligible ? bogoDetails.totalItems : quantity;
-
+    // Create checkout URL with variant ID and purchase type
     const checkoutUrl = getCheckoutUrl(
       selectedProductId,
       selectedPackSize,
-      checkoutQuantity,
+      quantity,
       selectedPurchaseType as "onetime" | "subscription"
     );
 
+    // Redirect to checkout
     window.location.href = checkoutUrl;
 
     console.log("Redirecting to checkout:", {
@@ -414,9 +333,6 @@ const ProductDetailPage: React.FC<ProductDetailPageProps> = ({
       packSize: selectedPackSize,
       purchaseType: selectedPurchaseType,
       quantity,
-      bogoApplied: bogoDetails.isEligible,
-      freeItems: bogoDetails.freeItems,
-      totalItems: bogoDetails.totalItems,
       variantId,
       checkoutUrl,
     });
@@ -434,11 +350,11 @@ const ProductDetailPage: React.FC<ProductDetailPageProps> = ({
           <div className="space-y-4">
             {/* Main Product Image with Swipe Support */}
             <div
-              className="aspect-square rounded-[30px] overflow-hidden relative select-none"
+              className="aspect-square  rounded-[30px] overflow-hidden  relative select-none"
               onTouchStart={handleTouchStart}
               onTouchMove={handleTouchMove}
               onTouchEnd={handleTouchEnd}
-              style={{ touchAction: "pan-y pinch-zoom" }}
+              style={{ touchAction: "pan-y pinch-zoom" }} // Allows vertical scrolling but handles horizontal swipes
             >
               <AnimatePresence mode="wait">
                 <motion.img
@@ -516,55 +432,12 @@ const ProductDetailPage: React.FC<ProductDetailPageProps> = ({
               <div className="space-y-2">
                 {currentProduct?.benefits.map((benefit) => (
                   <div key={benefit} className="flex items-center space-x-2">
-                    ✅
+                    ✅{/* <Check className="w-5 h-5 text-green-600" /> */}{" "}
                     <span className="text-gray-700 ml-1">{benefit}</span>
                   </div>
                 ))}
               </div>
             </div>
-
-            {/* BOGO Offer Banner */}
-            {bogoOffer.active && selectedPurchaseType === "onetime" && (
-              <motion.div
-                initial={{ opacity: 0, y: -10 }}
-                animate={{ opacity: 1, y: 0 }}
-                className="bg-gradient-to-r from-[#ffe25d] to-[#ffd700] rounded-xl p-4 border-2 border-foreground"
-              >
-                <div className="flex items-start justify-between mb-2">
-                  <div className="flex items-center gap-2">
-                    <Gift className="w-5 h-5 text-foreground" />
-                    <h3 className="font-bold text-foreground">
-                      {bogoOffer.title}
-                    </h3>
-                  </div>
-                  {bogoOffer.expiresAt && (
-                    <div className="text-xs font-semibold">
-                      <div className="text-foreground/80 mb-1">Expiring in</div>
-                      <div className="flex gap-1 text-foreground">
-                        <span className="bg-white px-2 py-1 rounded">
-                          {timeRemaining.days}d
-                        </span>
-                        <span className="bg-white px-2 py-1 rounded">
-                          {timeRemaining.hours}h
-                        </span>
-                        <span className="bg-white px-2 py-1 rounded">
-                          {timeRemaining.minutes}m
-                        </span>
-                        <span className="bg-white px-2 py-1 rounded">
-                          {timeRemaining.seconds}s
-                        </span>
-                      </div>
-                    </div>
-                  )}
-                </div>
-                {bogoDetails.isEligible && (
-                  <div className="mt-2 text-sm font-medium text-foreground">
-                    🎁 You're getting {bogoDetails.freeItems} free item
-                    {bogoDetails.freeItems > 1 ? "s" : ""}! ({bogoDetails.totalItems} total)
-                  </div>
-                )}
-              </motion.div>
-            )}
 
             {/* Product Selection Form */}
             <form onSubmit={handleSubmit} className="space-y-6">
@@ -582,13 +455,13 @@ const ProductDetailPage: React.FC<ProductDetailPageProps> = ({
                         value={product.id}
                         checked={selectedProductId === product.id}
                         onChange={(e) => setSelectedProductId(e.target.value)}
-                        className="sr-only"
+                        className="sr-only "
                       />
                       <span
-                        className={`inline-block px-4 py-4 rounded-full border transition-colors text-sm font-medium ${
+                        className={`inline-block px-4 py-4 rounded-full border transition-colors text-sm font-medium  ${
                           selectedProductId === product.id
-                            ? "border-foreground text-foreground border-2 bg-[#FFF6D1]"
-                            : "border-gray-300 text-gray-700 hover:border-gray-400"
+                            ? "border-foreground  text-foreground border-2 bg-[#FFF6D1]"
+                            : "border-gray-300 text-gray-700  hover:border-gray-400"
                         }`}
                       >
                         {product.id === "variety-pack"
@@ -617,9 +490,9 @@ const ProductDetailPage: React.FC<ProductDetailPageProps> = ({
                         className="sr-only"
                       />
                       <span
-                        className={`inline-block px-4 py-2 text-sm font-medium rounded-full border transition-colors ${
+                        className={`inline-block px-4 py-2 text-sm font-medium  rounded-full border transition-colors ${
                           selectedPackSize === pack.id
-                            ? "border-foreground text-foreground border-2 bg-[#FFF6D1]"
+                            ? "border-foreground  text-foreground border-2 bg-[#FFF6D1]"
                             : "border-gray-300 text-gray-700 hover:border-gray-400"
                         }`}
                       >
@@ -642,7 +515,7 @@ const ProductDetailPage: React.FC<ProductDetailPageProps> = ({
                       className={`block p-4 rounded-xl border cursor-pointer transition-colors ${
                         selectedPurchaseType === option.id
                           ? "border-foreground border-2 bg-[#fff6d1]"
-                          : "border-gray-300 hover:border-gray-400"
+                          : "border-gray-300 hover:border-gray-400 "
                       }`}
                     >
                       <div className="flex items-center justify-between">
@@ -672,6 +545,7 @@ const ProductDetailPage: React.FC<ProductDetailPageProps> = ({
                           <span className="font-bold">
                             {option.discountPercent ? (
                               <>
+                                {" "}
                                 <span className="line-through opacity-80 font-light">
                                   $
                                   {Math.floor(
@@ -736,7 +610,7 @@ const ProductDetailPage: React.FC<ProductDetailPageProps> = ({
                   </div>
                   <Button
                     type="submit"
-                    className="flex-1 bg-foreground font-heading text-white px-8 py-8 text-xl font-semibold transition-colors rounded-full cursor-pointer"
+                    className="flex-1 bg-foreground font-heading text-white px-8 py-8 text-xl font-semibold  transition-colors rounded-full cursor-pointer"
                   >
                     {isSpinning ? (
                       <div className="w-6 h-6 border-4 border-white border-t-transparent border-b-transparent rounded-full animate-spin mx-auto"></div>
@@ -746,7 +620,7 @@ const ProductDetailPage: React.FC<ProductDetailPageProps> = ({
                   </Button>
                 </div>
                 {/* Trust Badges */}
-                <div className="flex items-center justify-center space-x-6 text-sm font-heading">
+                <div className="flex items-center justify-center space-x-6 text-sm  font-heading">
                   <div className="flex items-center space-x-2">
                     <Truck className="w-4 h-4" />
                     <span>FREE SHIPPING OVER $100</span>
@@ -820,11 +694,11 @@ const ProductDetailPage: React.FC<ProductDetailPageProps> = ({
               {accordionItems.map((item) => (
                 <div
                   key={item.id}
-                  className="border-b border-gray-200 overflow-hidden"
+                  className="border-b border-gray-200  overflow-hidden "
                 >
                   <button
                     onClick={() => toggleAccordion(item.id)}
-                    className="w-full px-6 py-4 text-left flex items-center justify-between transition-colors cursor-pointer"
+                    className="w-full px-6 py-4 text-left flex items-center justify-between  transition-colors cursor-pointer"
                   >
                     <span className="font-semibold text-foreground">
                       {item.title}
@@ -848,7 +722,7 @@ const ProductDetailPage: React.FC<ProductDetailPageProps> = ({
                     style={{ overflow: "hidden" }}
                   >
                     <div className="px-6 pb-4">
-                      <div className="">
+                      <div className=" ">
                         {typeof item.content === "string" ? (
                           <p>{item.content}</p>
                         ) : (
