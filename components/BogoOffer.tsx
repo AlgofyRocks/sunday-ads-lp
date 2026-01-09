@@ -109,12 +109,9 @@ const BogoOffer: React.FC<BogoBannerProps> = ({
             <div className="min-w-0">
               <div className="flex items-center gap-1.5 mb-0.5">
                 <div className="bg-foreground text-white text-[10px] px-1.5 py-0.5 rounded font-bold whitespace-nowrap">
-                  BUY 1 GET 1 FREE
+                  BOGO (Buy 1 get 1 the same)
                 </div>
               </div>
-              <p className="text-xs text-foreground/80 truncate">
-                Free {selectedProduct.name} with purchase
-              </p>
             </div>
 
             {/* All time units in one row */}
