@@ -1,4 +1,4 @@
-// BOGO Component - Ultra Compact Version
+// BOGO Component - Final Compact Version
 "use client";
 import { Product } from "@/types/product";
 import { motion } from "motion/react";
@@ -84,12 +84,12 @@ const BogoOffer: React.FC<BogoBannerProps> = ({
     >
       <div className="flex items-center gap-2 p-2">
         {/* Product Image */}
-        <div className="flex-shrink-0 relative">
+        <div className="flex-shrink-0">
           <div className="bg-white/50 rounded p-1 border border-white/30">
             <div className="relative w-10 h-10">
               <img
                 src={selectedProduct.images[0]?.src}
-                alt={selectedProduct.images[0]?.alt || selectedProduct.name}
+                alt=""
                 className="w-full h-full object-contain"
                 loading="lazy"
                 onError={(e) => {
@@ -103,77 +103,73 @@ const BogoOffer: React.FC<BogoBannerProps> = ({
 
         {/* Content Area */}
         <div className="flex-1 min-w-0">
-          {/* Text and Countdown in one row */}
-          <div className="flex items-center justify-between gap-2">
-            {/* Text */}
-            <div className="min-w-0">
-              <div className="flex items-center gap-1.5 mb-0.5">
-                <div className="bg-foreground text-white text-[10px] px-1.5 py-0.5 rounded font-bold whitespace-nowrap">
-                  BUY 1 GET 1 FREE
-                </div>
-              </div>
-              <p className="text-xs text-foreground/80 truncate">
-                Free {selectedProduct.name} with purchase
-              </p>
+          {/* BOGO Label */}
+          <div className="mb-1">
+            <div className="bg-foreground text-white text-[10px] px-1.5 py-0.5 rounded font-bold whitespace-nowrap">
+              BOGO (Buy 1 get 1 the same)
             </div>
+          </div>
 
-            {/* All time units in one row */}
-            <div className="flex-shrink-0">
-              <div className="flex items-center gap-1">
-                {/* Days if exists */}
-                {timeLeft.days > 0 && (
-                  <>
-                    <div className="flex flex-col items-center">
-                      <div className="bg-white rounded px-1 py-0.5 min-w-[24px] border border-foreground/20">
-                        <span className="text-sm font-bold text-foreground font-mono tabular-nums">
-                          {timeLeft.days}
-                        </span>
-                      </div>
-                      <span className="text-[9px] text-foreground/60 font-medium">
-                        D
+          {/* Countdown only - all in one line */}
+          <div className="flex items-center gap-1">
+            <span className="text-xs font-medium text-foreground/70 whitespace-nowrap">
+              Ends in:
+            </span>
+            
+            <div className="flex items-center gap-1">
+              {/* Days if exists */}
+              {timeLeft.days > 0 && (
+                <>
+                  <div className="flex flex-col items-center">
+                    <div className="bg-white rounded px-1 py-0.5 min-w-[24px] border border-foreground/20">
+                      <span className="text-sm font-bold text-foreground font-mono tabular-nums">
+                        {timeLeft.days}
                       </span>
                     </div>
-                    <span className="text-xs font-bold text-foreground/40 pb-1">:</span>
-                  </>
-                )}
-                
-                {/* Hours */}
-                <div className="flex flex-col items-center">
-                  <div className="bg-white rounded px-1 py-0.5 min-w-[24px] border border-foreground/20">
-                    <span className="text-sm font-bold text-foreground font-mono tabular-nums">
-                      {formatNumber(timeLeft.hours)}
+                    <span className="text-[9px] text-foreground/60 font-medium">
+                      D
                     </span>
                   </div>
-                  <span className="text-[9px] text-foreground/60 font-medium">
-                    H
+                  <span className="text-xs font-bold text-foreground/40 pb-1">:</span>
+                </>
+              )}
+              
+              {/* Hours */}
+              <div className="flex flex-col items-center">
+                <div className="bg-white rounded px-1 py-0.5 min-w-[24px] border border-foreground/20">
+                  <span className="text-sm font-bold text-foreground font-mono tabular-nums">
+                    {formatNumber(timeLeft.hours)}
                   </span>
                 </div>
-                <span className="text-xs font-bold text-foreground/40 pb-1">:</span>
-                
-                {/* Minutes */}
-                <div className="flex flex-col items-center">
-                  <div className="bg-white rounded px-1 py-0.5 min-w-[24px] border border-foreground/20">
-                    <span className="text-sm font-bold text-foreground font-mono tabular-nums">
-                      {formatNumber(timeLeft.minutes)}
-                    </span>
-                  </div>
-                  <span className="text-[9px] text-foreground/60 font-medium">
-                    M
+                <span className="text-[9px] text-foreground/60 font-medium">
+                  H
+                </span>
+              </div>
+              <span className="text-xs font-bold text-foreground/40 pb-1">:</span>
+              
+              {/* Minutes */}
+              <div className="flex flex-col items-center">
+                <div className="bg-white rounded px-1 py-0.5 min-w-[24px] border border-foreground/20">
+                  <span className="text-sm font-bold text-foreground font-mono tabular-nums">
+                    {formatNumber(timeLeft.minutes)}
                   </span>
                 </div>
-                <span className="text-xs font-bold text-foreground/40 pb-1">:</span>
-                
-                {/* Seconds */}
-                <div className="flex flex-col items-center">
-                  <div className="bg-white rounded px-1 py-0.5 min-w-[24px] border border-foreground/20">
-                    <span className="text-sm font-bold text-foreground font-mono tabular-nums">
-                      {formatNumber(timeLeft.seconds)}
-                    </span>
-                  </div>
-                  <span className="text-[9px] text-foreground/60 font-medium">
-                    S
+                <span className="text-[9px] text-foreground/60 font-medium">
+                  M
+                </span>
+              </div>
+              <span className="text-xs font-bold text-foreground/40 pb-1">:</span>
+              
+              {/* Seconds */}
+              <div className="flex flex-col items-center">
+                <div className="bg-white rounded px-1 py-0.5 min-w-[24px] border border-foreground/20">
+                  <span className="text-sm font-bold text-foreground font-mono tabular-nums">
+                    {formatNumber(timeLeft.seconds)}
                   </span>
                 </div>
+                <span className="text-[9px] text-foreground/60 font-medium">
+                  S
+                </span>
               </div>
             </div>
           </div>
