@@ -366,7 +366,7 @@ React.useEffect(() => {
       id="product"
     >
       <div className="max-w-7xl mx-auto">
-     <BogoOffer selectedProduct={currentProduct} className="mb-8" />
+
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16">
           {/* Product Images */}
           <div className="space-y-4">
@@ -606,7 +606,7 @@ React.useEffect(() => {
                   ))}
                 </div>
               </div>
-
+<BogoOffer selectedProduct={currentProduct} className="mb-4" />
               {/* Quantity and Add to Cart */}
               <div className="space-y-4">
                 <div className="flex items-center space-x-4">
