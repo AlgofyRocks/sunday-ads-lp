@@ -558,16 +558,11 @@ export const getCheckoutUrl = (
     cartParams.append('items[0][selling_plan]', SUBSCRIPTION_SELLING_PLAN_ID);
   }
 
-  // Add the free product (BOGO)
-  if (freeVariantId) {
+  // Add the free product (BOGO) - ONLY for one-time purchases
+  if (purchaseType === "onetime" && freeVariantId) {
     cartParams.append('items[1][id]', freeVariantId);
     cartParams.append('items[1][quantity]', quantity.toString()); // Same quantity as paid product
-    
-    // Add selling plan for subscriptions on the free product too
-    if (purchaseType === "subscription") {
-      cartParams.append('items[1][selling_plan]', SUBSCRIPTION_SELLING_PLAN_ID);
-    }
-  } else {
+  } else if (purchaseType === "onetime" && !freeVariantId) {
     console.warn(`No free variant ID found for ${productId} - ${packSize}. BOGO will not be applied.`);
   }
 
@@ -608,15 +603,10 @@ export const getDecodedCartAddUrl = (
     cartParams.append('items[0][selling_plan]', SUBSCRIPTION_SELLING_PLAN_ID);
   }
 
-  // Add free product
-  if (freeVariantId) {
+  // Add free product - only for one-time purchases
+  if (purchaseType === "onetime" && freeVariantId) {
     cartParams.append('items[1][id]', freeVariantId);
     cartParams.append('items[1][quantity]', quantity.toString());
-    
-    // Add selling plan for subscriptions
-    if (purchaseType === "subscription") {
-      cartParams.append('items[1][selling_plan]', SUBSCRIPTION_SELLING_PLAN_ID);
-    }
   }
 
   cartParams.append('return_to', '/checkout?');
