@@ -2,6 +2,7 @@
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
+import BogoOffer from "./BogoOffer";
 import {
   AccordionItem,
   getAvailablePackSizes,
@@ -98,6 +99,25 @@ const ProductDetailPage: React.FC<ProductDetailPageProps> = ({
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, [selectedProductId]);
+
+  // Reset spinner when user navigates back to the page
+React.useEffect(() => {
+  const handleVisibilityChange = () => {
+    if (document.visibilityState === 'visible') {
+      setIsSpinning(false);
+    }
+  };
+
+  // Reset on mount
+  setIsSpinning(false);
+
+  // Reset when page becomes visible again (user hits back button)
+  document.addEventListener('visibilitychange', handleVisibilityChange);
+  
+  return () => {
+    document.removeEventListener('visibilitychange', handleVisibilityChange);
+  };
+}, []);
 
   // Handle image navigation
   const goToNextImage = useCallback(() => {
@@ -301,42 +321,43 @@ const ProductDetailPage: React.FC<ProductDetailPageProps> = ({
     setQuantity((prev) => Math.max(1, prev + delta));
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
-    setIsSpinning(true);
-    e.preventDefault();
+ const handleSubmit = (e: React.FormEvent) => {
+  e.preventDefault();
+  setIsSpinning(true);
 
-    // Get the variant ID for the selected combination
-    const variantId = getVariantId(selectedProductId, selectedPackSize);
+  // Get the variant ID for the selected combination
+  const variantId = getVariantId(selectedProductId, selectedPackSize);
 
-    if (!variantId) {
-      console.error(
-        "No variant ID found for:",
-        selectedProductId,
-        selectedPackSize
-      );
-      return;
-    }
-
-    // Create checkout URL with variant ID and purchase type
-    const checkoutUrl = getCheckoutUrl(
+  if (!variantId) {
+    console.error(
+      "No variant ID found for:",
       selectedProductId,
-      selectedPackSize,
-      quantity,
-      selectedPurchaseType as "onetime" | "subscription"
+      selectedPackSize
     );
+    setIsSpinning(false); // ADD THIS LINE - Reset spinner on error
+    return;
+  }
 
-    // Redirect to checkout
-    window.location.href = checkoutUrl;
+  // Create checkout URL with variant ID and purchase type
+  const checkoutUrl = getCheckoutUrl(
+    selectedProductId,
+    selectedPackSize,
+    quantity,
+    selectedPurchaseType as "onetime" | "subscription"
+  );
 
-    console.log("Redirecting to checkout:", {
-      productId: selectedProductId,
-      packSize: selectedPackSize,
-      purchaseType: selectedPurchaseType,
-      quantity,
-      variantId,
-      checkoutUrl,
-    });
-  };
+  // Redirect to checkout
+  window.location.href = checkoutUrl;
+
+  console.log("Redirecting to checkout:", {
+    productId: selectedProductId,
+    packSize: selectedPackSize,
+    purchaseType: selectedPurchaseType,
+    quantity,
+    variantId,
+    checkoutUrl,
+  });
+};
 
   return (
     <section
@@ -345,6 +366,7 @@ const ProductDetailPage: React.FC<ProductDetailPageProps> = ({
       id="product"
     >
       <div className="max-w-7xl mx-auto">
+
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16">
           {/* Product Images */}
           <div className="space-y-4">
@@ -584,7 +606,7 @@ const ProductDetailPage: React.FC<ProductDetailPageProps> = ({
                   ))}
                 </div>
               </div>
-
+<BogoOffer selectedProduct={currentProduct} className="mb-4" />
               {/* Quantity and Add to Cart */}
               <div className="space-y-4">
                 <div className="flex items-center space-x-4">
