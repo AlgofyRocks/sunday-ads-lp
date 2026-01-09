@@ -1,4 +1,4 @@
-// BOGO Component - Ultra Compact Version
+// BOGO Component - Ultra Compact Version with Fixed Timezone
 "use client";
 import { Product } from "@/types/product";
 import { motion } from "motion/react";
@@ -30,7 +30,9 @@ const BogoOffer: React.FC<BogoBannerProps> = ({
   const [isExpired, setIsExpired] = useState(false);
   const [isVisible, setIsVisible] = useState(true);
 
-  const targetDate = new Date("2026-02-01T16:00:00-05:00");
+  // Target date: February 1, 2026 at 4:00 PM EST
+  // EST is UTC-5, so 4:00 PM EST = 9:00 PM UTC
+  const targetDate = new Date("2026-02-01T21:00:00Z");
 
   useEffect(() => {
     const calculateTimeLeft = () => {
