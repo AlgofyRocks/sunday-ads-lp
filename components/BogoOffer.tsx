@@ -106,7 +106,7 @@ const BogoOffer: React.FC<BogoBannerProps> = ({
         {/* Content Area */}
         <div className="flex-1 min-w-0">
           {/* Text and Countdown in one row */}
-          <div style="flex-wrap:wrap;" className="flex items-center justify-between gap-2">
+          <div  className="flex items-center justify-between gap-2">
             {/* Text */}
             <div className="min-w-0">
               <div className="flex items-center gap-1.5 mb-0.5">
