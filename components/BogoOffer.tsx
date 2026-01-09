@@ -1,3 +1,4 @@
+// BOGO Component
 "use client";
 import { Product } from "@/types/product";
 import { motion } from "motion/react";
