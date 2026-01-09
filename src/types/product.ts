@@ -90,7 +90,42 @@ import ProductHalfHalf1 from "@/../public/products/halfhalf_1.png";
 import ProductHalfHalf2 from "@/../public/products/halfhalf_2.webp";
 import ProductHalfHalf3 from "@/../public/products/halfhalf_3.webp";
 
+// ============================================
+// BOGO FREE VARIANTS MAPPING
+// ============================================
+// Maps regular product variants to their free (100% off) counterparts
+const BOGO_FREE_VARIANTS: Record<string, Record<string, string>> = {
+  "variety-pack": {
+    "8-pack": "42006427598933",   // Free Variety Pack 8-pack
+    "12-pack": "42006427631701",  // Free Variety Pack 12-pack
+    "16-pack": "42006427664469",  // Free Variety Pack 16-pack
+  },
+  "classic": {
+    "8-pack": "42006427041877",   // Free Classic 8-pack
+    "12-pack": "42006427074645",  // Free Classic 12-pack
+    "16-pack": "42006427107413",  // Free Classic 16-pack
+  },
+  "half-half": {
+    "8-pack": "42006427172949",   // Free Half & Half 8-pack
+    "12-pack": "42006427205717",  // Free Half & Half 12-pack
+    "16-pack": "42006427238485",  // Free Half & Half 16-pack
+  },
+  "peach": {
+    "8-pack": "42006427435093",   // Free Peach 8-pack
+    "12-pack": "42006427467861",  // Free Peach 12-pack
+    "16-pack": "42006427500629",  // Free Peach 16-pack
+  },
+  "hibiscus": {
+    "8-pack": "42006427304021",   // Free Hibiscus 8-pack
+    "12-pack": "42006427336789",  // Free Hibiscus 12-pack
+    "16-pack": "42006427369557",  // Free Hibiscus 16-pack
+  },
+};
 
+// Utility function to get the free variant ID for BOGO
+export const getFreeVariantId = (productId: string, packSize: string): string | null => {
+  return BOGO_FREE_VARIANTS[productId]?.[packSize] || null;
+};
 
 // Product data
 export const products: Product[] = [
@@ -493,7 +528,10 @@ export const getVariantPrice = (productId: string, packSize: string): { price: s
   };
 };
 
-// Utility function to generate Shopify checkout URL
+// ============================================
+// UPDATED CHECKOUT URL WITH BOGO
+// ============================================
+// Utility function to generate Shopify checkout URL with BOGO (Buy One Get One Free)
 export const getCheckoutUrl = (
   productId: string,
   packSize: string,
@@ -501,6 +539,7 @@ export const getCheckoutUrl = (
   purchaseType: "onetime" | "subscription" = "onetime"
 ): string => {
   const variantId = getVariantId(productId, packSize);
+  const freeVariantId = getFreeVariantId(productId, packSize);
 
   if (!variantId) {
     console.warn(`No variant ID found for ${productId} - ${packSize}`);
@@ -509,12 +548,25 @@ export const getCheckoutUrl = (
 
   // Build the cart/add URL parameters
   const cartParams = new URLSearchParams();
+  
+  // Add the regular (paid) product
   cartParams.append('items[0][id]', variantId);
   cartParams.append('items[0][quantity]', quantity.toString());
 
-  // Add selling plan for subscriptions
+  // Add selling plan for subscriptions on the paid product
   if (purchaseType === "subscription") {
     cartParams.append('items[0][selling_plan]', SUBSCRIPTION_SELLING_PLAN_ID);
+  }
+
+  // Add the free product (BOGO) - for BOTH one-time and subscription
+  // Always add exactly 1 free item, regardless of paid quantity
+  if (freeVariantId) {
+    cartParams.append('items[1][id]', freeVariantId);
+    cartParams.append('items[1][quantity]', '1'); // Always just 1 free item
+    
+    // Note: Free products don't get selling plans since they're already $0
+  } else {
+    console.warn(`No free variant ID found for ${productId} - ${packSize}. BOGO will not be applied.`);
   }
 
   // Add the final redirect to checkout (this gets double-encoded)
@@ -540,14 +592,25 @@ export const getDecodedCartAddUrl = (
   purchaseType: "onetime" | "subscription" = "onetime"
 ): string => {
   const variantId = getVariantId(productId, packSize);
+  const freeVariantId = getFreeVariantId(productId, packSize);
+  
   if (!variantId) return '';
 
   const cartParams = new URLSearchParams();
+  
+  // Add regular product
   cartParams.append('items[0][id]', variantId);
   cartParams.append('items[0][quantity]', quantity.toString());
 
   if (purchaseType === "subscription") {
     cartParams.append('items[0][selling_plan]', SUBSCRIPTION_SELLING_PLAN_ID);
+  }
+
+  // Add free product - for both one-time and subscription
+  // Always just 1 free item
+  if (freeVariantId) {
+    cartParams.append('items[1][id]', freeVariantId);
+    cartParams.append('items[1][quantity]', '1'); // Always 1 free
   }
 
   cartParams.append('return_to', '/checkout?');
