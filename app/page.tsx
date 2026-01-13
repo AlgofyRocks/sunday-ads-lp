@@ -1,4 +1,3 @@
-import { Metadata } from 'next';
 import AnnouncementBar from "components/announcement-bar";
 import LPHero from "components/lp-hero";
 import LPImageTextSection from "components/lp-image-text";
@@ -17,33 +16,6 @@ import ProductDetailPage from "components/lp-product-detail";
 import LPSocial from "components/lp-social";
 import LPSubscription from "components/lp-subscription";
 import LPTable from "components/lp-table";
-
-export const metadata: Metadata = {
-  title: 'SunDay - Buy One Get One Free | Premium Iced Tea',
-  description: 'All your SunDay™ iced tea favorites with a zero-regret buzz. Limited time BOGO offer!',
-  openGraph: {
-    title: 'SunDay - Buy One Get One Free',
-    description: 'All your SunDay™ iced tea favorites with a zero-regret buzz. Limited time BOGO offer!',
-    url: 'https://drinkasunday.com',
-    siteName: 'SunDay',
-    images: [
-      {
-        url: '/og-image.png',
-        width: 1200,
-        height: 630,
-        alt: 'SunDay Iced Tea BOGO Offer',
-      },
-    ],
-    type: 'website',
-  },
-  twitter: {
-    card: 'summary_large_image',
-    title: 'SunDay - Buy One Get One Free',
-    description: 'All your SunDay™ iced tea favorites with a zero-regret buzz. Limited time BOGO offer!',
-    images: ['/og-image.png'],
-  },
-};
-
 export default function HomePage() {
   return (
     <>
@@ -85,7 +57,9 @@ export default function HomePage() {
         klaviyoPublicKey="VFXVmg"
         useServerSide={false}
       />
+      {/* <LPFeed /> */}
       <LPFooter />
     </>
   );
 }
+
