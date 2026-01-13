@@ -1,3 +1,4 @@
+import { Metadata } from 'next';
 import AnnouncementBar from "components/announcement-bar";
 import LPHero from "components/lp-hero";
 import LPImageTextSection from "components/lp-image-text";
@@ -16,6 +17,27 @@ import ProductDetailPage from "components/lp-product-detail";
 import LPSocial from "components/lp-social";
 import LPSubscription from "components/lp-subscription";
 import LPTable from "components/lp-table";
+
+export const metadata: Metadata = {
+  title: 'SunDay™ "High" Iced Tea - Buzz, Not B00zee',
+  description:
+    "Microdosed iced teas for a mellow buzzz without b00ze. All-natural, delicious flavors. Take it easy like a Sunday morning.",
+  openGraph: {
+    images: [
+      {
+        url: "https://shop.drinkasunday.com/og-image.png",
+        width: 1200,
+        height: 630,
+        alt: 'SunDay™ High Iced Tea',
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    images: ["https://shop.drinkasunday.com/og-image.png"],
+  },
+};
+
 export default function HomePage() {
   return (
     <>
@@ -62,4 +84,3 @@ export default function HomePage() {
     </>
   );
 }
-
