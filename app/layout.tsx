@@ -4,8 +4,6 @@ import { ReactNode } from "react";
 import Script from "next/script";
 import "./globals.css";
 import type { Metadata } from 'next';
-
-
 const { SITE_NAME } = process.env;
 import localFont from "next/font/local";
 
@@ -35,12 +33,10 @@ const acuminFont = localFont({
 });
 
 export const metadata: Metadata = {
-    metadataBase: new URL("https://shop.drinkasunday.com"),
-
+  metadataBase: new URL("https://shop.drinkasunday.com"),
   title: 'SunDay™ "High" Iced Tea - Buzz, Not B00zee',
   description:
     "Microdosed iced teas for a mellow buzzz without b00ze. All-natural, delicious flavors. Take it easy like a Sunday morning.",
-
   openGraph: {
     type: "website",
     url: "https://shop.drinkasunday.com/",
@@ -49,21 +45,20 @@ export const metadata: Metadata = {
       "Microdosed iced teas for a mellow buzzz without b00ze. All-natural, delicious flavors. Take it easy like a Sunday morning.",
     images: [
       {
-        url: "https://shop.drinkasunday.com/sunday-share.png",
+        url: "https://shop.drinkasunday.com/og-image.png",
         width: 1200,
         height: 630,
         alt: 'SunDay™ High Iced Tea',
       },
     ],
   },
-
   twitter: {
     card: "summary_large_image",
     url: "https://shop.drinkasunday.com/",
     title: 'SunDay™ "High" Iced Tea - Buzz, Not B00zee',
     description:
       "Microdosed iced teas for a mellow buzzz without b00ze. All-natural, delicious flavors. Take it easy like a Sunday morning.",
-    images: ["https://shop.drinkasunday.com/sunday-share.png"],
+    images: ["https://shop.drinkasunday.com/og-image.png"],
   },
 };
 
@@ -98,7 +93,6 @@ export default async function RootLayout({
             style={{ display: 'none', visibility: 'hidden' }}
           />
         </noscript>
-
         <main className="font-body">{children}</main>
       </body>
     </html>
