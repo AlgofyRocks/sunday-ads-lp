@@ -18,6 +18,20 @@ const AgeGate: React.FC<AgeGateProps> = ({ onVerified, className = "" }) => {
   });
 
   React.useEffect(() => {
+    // Check if user agent is a bot/crawler
+    if (typeof window !== "undefined") {
+      const userAgent = navigator.userAgent || "";
+      const isBot = /bot|crawler|spider|crawling|facebookexternalhit|whatsapp|slackbot|telegrambot|discordbot|twitterbot|linkedinbot/i.test(userAgent);
+      
+      // If it's a bot, skip the age gate entirely
+      if (isBot) {
+        setShowAgegate(false);
+        if (onVerified) onVerified();
+        return;
+      }
+    }
+
+    // Normal age gate logic for humans
     if (isVerified) {
       setShowAgegate(false);
       if (onVerified) onVerified();
@@ -34,9 +48,15 @@ const AgeGate: React.FC<AgeGateProps> = ({ onVerified, className = "" }) => {
     setShowAgegate(false);
     if (onVerified) onVerified();
   };
+
   const handleNo = () => {
     setShowUnderageMessage(true);
   };
+
+  // Don't render anything if age gate should not be shown
+  if (!showAgegate) {
+    return null;
+  }
 
   return (
     <div
@@ -53,7 +73,6 @@ const AgeGate: React.FC<AgeGateProps> = ({ onVerified, className = "" }) => {
         <div className="mb-8">
           <LogoIcon className="w-32 h-auto mx-auto" />
         </div>
-
         <h2 className="text-2xl font-medium text-[#1e3a5f] mb-6">
           Hold up, are you at least 21 years of age?
         </h2>
@@ -65,7 +84,6 @@ const AgeGate: React.FC<AgeGateProps> = ({ onVerified, className = "" }) => {
         ) : (
           ""
         )}
-
         <div className="flex gap-4 mb-6">
           <button
             onClick={handleYes}
@@ -80,17 +98,16 @@ const AgeGate: React.FC<AgeGateProps> = ({ onVerified, className = "" }) => {
             NO
           </button>
         </div>
-
         <p className="text-sm text-gray-600">
           By entering this website you are agreeing to the{" "}
-          <a
+          
             href="https://drinkasunday.com/pages/terms-of-use"
             className="text-[#1e3a5f] underline hover:no-underline"
           >
             Terms & Conditions
           </a>{" "}
           and{" "}
-          <a
+          
             href="https://drinkasunday.com/pages/privacy-policy"
             className="text-[#1e3a5f] underline hover:no-underline"
           >
