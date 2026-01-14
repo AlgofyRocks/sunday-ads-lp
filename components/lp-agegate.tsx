@@ -98,22 +98,22 @@ const AgeGate: React.FC<AgeGateProps> = ({ onVerified, className = "" }) => {
             NO
           </button>
         </div>
-        <p className="text-sm text-gray-600">
-          By entering this website you are agreeing to the{" "}
-          
-            href="https://drinkasunday.com/pages/terms-of-use"
-            className="text-[#1e3a5f] underline hover:no-underline"
-          >
-            Terms & Conditions
-          </a>{" "}
-          and{" "}
-          
-            href="https://drinkasunday.com/pages/privacy-policy"
-            className="text-[#1e3a5f] underline hover:no-underline"
-          >
-            Privacy Policy
-          </a>
-        </p>
+       <p className="text-sm text-gray-600">
+  By entering this website you are agreeing to the{" "}
+  
+    href="https://drinkasunday.com/pages/terms-of-use"
+    className="text-[#1e3a5f] underline hover:no-underline"
+  >
+    Terms &amp; Conditions
+  </a>{" "}
+  and{" "}
+  
+    href="https://drinkasunday.com/pages/privacy-policy"
+    className="text-[#1e3a5f] underline hover:no-underline"
+  >
+    Privacy Policy
+  </a>
+</p>
       </div>
     </div>
   );
