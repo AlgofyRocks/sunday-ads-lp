@@ -133,22 +133,22 @@ export const products: Product[] = [
     slug: "variety-pack",
     description:
       "All your SunDay™ iced tea favorites with a zero-regret buzz. ",
-    basePrice: "56.00",
+    basePrice: "39.99",
     variants: [
       {
         packSizeId: "8-pack",
         variantId: "41679256191061",
-        price: "56.00",
+        price: "39.99",
       },
       {
         packSizeId: "12-pack",
         variantId: "41679256223829",
-        price: "84.00",
+        price: "56.99",
       },
       {
         packSizeId: "16-pack",
         variantId: "41679256256597",
-        price: "112.00",
+        price: "79.99",
       }
     ],
     images: [
@@ -202,7 +202,7 @@ export const products: Product[] = [
     slug: "classic-iced-tea",
     description:
       "Classic black tea & lemon with a subtle lift.",
-    basePrice: "56.00",
+    basePrice: "39.99",
     images: [
       {
         id: "main",
@@ -225,17 +225,17 @@ export const products: Product[] = [
       {
         packSizeId: "8-pack",
         variantId: "41711465267285",
-        price: "56.00",
+        price: "39.99",
       },
       {
         packSizeId: "12-pack",
         variantId: "41711465300053",
-        price: "84.00",
+        price: "56.99",
       },
       {
         packSizeId: "16-pack",
         variantId: "41711465332821",
-        price: "112.00",
+        price: "79.99",
       }
     ],
     ingredients:
@@ -271,7 +271,7 @@ export const products: Product[] = [
     slug: "half-and-half",
     description:
       "Tea meets lemonade for a low dose golden-hour vibe.",
-    basePrice: "56.00",
+    basePrice: "39.99",
     images: [
       {
         id: "main",
@@ -294,17 +294,17 @@ export const products: Product[] = [
       {
         packSizeId: "8-pack",
         variantId: "41611734450261",
-        price: "56.00",
+        price: "39.99",
       },
       {
         packSizeId: "12-pack",
         variantId: "41611734483029",
-        price: "84.00",
+        price: "56.99",
       },
       {
         packSizeId: "16-pack",
         variantId: "41611734515797",
-        price: "112.00",
+        price: "79.99",
       }
     ],
     ingredients:
@@ -340,7 +340,7 @@ export const products: Product[] = [
     title: "Peach Iced Tea",
     description:
       "Juicy peach iced tea for a smooth, mellow lift.",
-    basePrice: "56.00",
+    basePrice: "39.99",
     images: [
       {
         id: "main",
@@ -363,17 +363,17 @@ export const products: Product[] = [
       {
         packSizeId: "8-pack",
         variantId: "41611734581333",
-        price: "56.00",
+        price: "39.99",
       },
       {
         packSizeId: "12-pack",
         variantId: "41611734614101",
-        price: "84.00",
+        price: "56.99",
       },
       {
         packSizeId: "16-pack",
         variantId: "41611734646869",
-        price: "112.00",
+        price: "79.99",
       }
     ],
     ingredients:
@@ -409,7 +409,7 @@ export const products: Product[] = [
     slug: "hibiscus-iced-tea",
     description:
       "Floral & tart, it's your new favorite ritual.",
-    basePrice: "56.00",
+    basePrice: "39.99",
     images: [
       {
         id: "main",
@@ -432,17 +432,17 @@ export const products: Product[] = [
       {
         packSizeId: "8-pack",
         variantId: "41611734712405",
-        price: "56.00",
+        price: "39.99",
       },
       {
         packSizeId: "12-pack",
         variantId: "41611734745173",
-        price: "84.00",
+        price: "56.99",
       },
       {
         packSizeId: "16-pack",
         variantId: "41611734777941",
-        price: "112.00",
+        price: "79.99",
       }
     ],
     ingredients:
