@@ -28,6 +28,16 @@ export default function LPNav() {
             </MenubarItem>
             <MenubarSeparator className="bg-foreground" />
             <MenubarItem>
+              <Link
+                href="https://drinkasunday.com/pages/store-locator"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                STORE LOCATOR
+              </Link>
+            </MenubarItem>
+            <MenubarSeparator className="bg-foreground" />
+            <MenubarItem>
               <Link href="#faqs">FAQS</Link>
             </MenubarItem>
           </MenubarContent>
@@ -39,6 +49,16 @@ export default function LPNav() {
         </li>
         <li>
           <Link href="#whats-in-the-can"> WHAT'S IN THE CAN</Link>
+        </li>
+        <li>
+          <Link
+            href="https://drinkasunday.com/pages/store-locator"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            {" "}
+            STORE LOCATOR
+          </Link>
         </li>
         <li>
           <Link href="#faqs"> FAQS</Link>
